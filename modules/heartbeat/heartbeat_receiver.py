@@ -5,6 +5,7 @@ Heartbeat receiving logic.
 from pymavlink import mavutil
 
 from ..common.modules.logger import logger
+import time
 
 
 # =================================================================================================
@@ -15,13 +16,14 @@ class HeartbeatReceiver:
     HeartbeatReceiver class to send a heartbeat
     """
 
+    max_threshold = 3
+
     __private_key = object()
 
     @classmethod
     def create(
         cls,
         connection: mavutil.mavfile,
-        args,  # Put your own arguments here
         local_logger: logger.Logger,
     ):
         """
@@ -33,22 +35,51 @@ class HeartbeatReceiver:
         self,
         key: object,
         connection: mavutil.mavfile,
-        args,  # Put your own arguments here
+        local_logger: logger.Logger,
     ) -> None:
         assert key is HeartbeatReceiver.__private_key, "Use create() method"
+        self._connection = connection
+        self._local_logger = local_logger
+        self._last_heartbeat_time = time.time()
+        self._missing_count = 0
+        self._status = "Disconnected"
 
-        # Do any intializiation here
-
-    def run(
-        self,
-        args,  # Put your own arguments here
-    ):
+    def run(self):
         """
-        Attempt to recieve a heartbeat message.
+        Attempt to receive a heartbeat message.
         If disconnected for over a threshold number of periods,
         the connection is considered disconnected.
         """
-        pass
+        try:
+            msg = self._connection.recv_match(
+                type="HEARTBEAT", blocking=False, timeout=1.0
+            )
+
+            if msg:
+                self._last_heartbeat_time = time.time()
+                self._missing_count = 0
+                self._status = "Connected"
+                self._local_logger.info("Connection status: Connected")
+
+            else:
+                time_since_last_heartbeat = time.time() - self._last_heartbeat_time
+                if time_since_last_heartbeat >= 1.0:
+                    self._missing_count += 1
+                    self._local_logger.warning(
+                        f"Missed a heartbeat. Count: {self._missing_count}"
+                    )
+
+            if self._missing_count >= self.max_threshold:
+                if self._status != "Disconnected":
+                    self._status = "Disconnected"
+                    self._local_logger.error(
+                        f"Connection status: Disconnected. Heart beats went past {self.max_threshold} heartbeats."
+                    )
+
+        except Exception as e:
+            self._local_logger.error(f"Error in HeartbeatReceiver.run: {e}")
+
+        return self._status
 
 
 # =================================================================================================

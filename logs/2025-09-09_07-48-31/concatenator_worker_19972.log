@@ -1,0 +1,26 @@
+07:48:33: [INFO] [D:\Repositories\Project Repositories\WARG\autonomy-bootcamp-2025-p2\documentation\multiprocess_example\concatenator\concatenator_worker.py | concatenator_worker | 38] Logger initialized
+07:48:33: [DEBUG] [D:\Repositories\Project Repositories\WARG\autonomy-bootcamp-2025-p2\documentation\multiprocess_example\concatenator\concatenator.py | run_concatenation | 33] Run
+07:48:33: [INFO] Hello 3010 world!
+07:48:33: [DEBUG] [D:\Repositories\Project Repositories\WARG\autonomy-bootcamp-2025-p2\documentation\multiprocess_example\concatenator\concatenator.py | run_concatenation | 33] Run
+07:48:34: [DEBUG] [D:\Repositories\Project Repositories\WARG\autonomy-bootcamp-2025-p2\documentation\multiprocess_example\concatenator\concatenator.py | run_concatenation | 33] Run
+07:48:34: [INFO] Hello 3012 world!
+07:48:34: [DEBUG] [D:\Repositories\Project Repositories\WARG\autonomy-bootcamp-2025-p2\documentation\multiprocess_example\concatenator\concatenator.py | run_concatenation | 33] Run
+07:48:34: [DEBUG] [D:\Repositories\Project Repositories\WARG\autonomy-bootcamp-2025-p2\documentation\multiprocess_example\concatenator\concatenator.py | run_concatenation | 33] Run
+07:48:34: [INFO] Hello 3014 world!
+07:48:34: [DEBUG] [D:\Repositories\Project Repositories\WARG\autonomy-bootcamp-2025-p2\documentation\multiprocess_example\concatenator\concatenator.py | run_concatenation | 33] Run
+07:48:34: [INFO] Hello 3006 world!
+07:48:38: [DEBUG] [D:\Repositories\Project Repositories\WARG\autonomy-bootcamp-2025-p2\documentation\multiprocess_example\concatenator\concatenator.py | run_concatenation | 33] Run
+07:48:39: [DEBUG] [D:\Repositories\Project Repositories\WARG\autonomy-bootcamp-2025-p2\documentation\multiprocess_example\concatenator\concatenator.py | run_concatenation | 33] Run
+07:48:39: [INFO] Hello 3008 world!
+07:48:39: [DEBUG] [D:\Repositories\Project Repositories\WARG\autonomy-bootcamp-2025-p2\documentation\multiprocess_example\concatenator\concatenator.py | run_concatenation | 33] Run
+07:48:39: [DEBUG] [D:\Repositories\Project Repositories\WARG\autonomy-bootcamp-2025-p2\documentation\multiprocess_example\concatenator\concatenator.py | run_concatenation | 33] Run
+07:48:39: [INFO] Hello 3010 world!
+07:48:39: [DEBUG] [D:\Repositories\Project Repositories\WARG\autonomy-bootcamp-2025-p2\documentation\multiprocess_example\concatenator\concatenator.py | run_concatenation | 33] Run
+07:48:39: [DEBUG] [D:\Repositories\Project Repositories\WARG\autonomy-bootcamp-2025-p2\documentation\multiprocess_example\concatenator\concatenator.py | run_concatenation | 33] Run
+07:48:39: [INFO] Hello 3022 world!
+07:48:40: [DEBUG] [D:\Repositories\Project Repositories\WARG\autonomy-bootcamp-2025-p2\documentation\multiprocess_example\concatenator\concatenator.py | run_concatenation | 33] Run
+07:48:40: [DEBUG] [D:\Repositories\Project Repositories\WARG\autonomy-bootcamp-2025-p2\documentation\multiprocess_example\concatenator\concatenator.py | run_concatenation | 33] Run
+07:48:40: [INFO] Hello 3024 world!
+07:48:40: [DEBUG] [D:\Repositories\Project Repositories\WARG\autonomy-bootcamp-2025-p2\documentation\multiprocess_example\concatenator\concatenator.py | run_concatenation | 33] Run
+07:48:40: [DEBUG] [D:\Repositories\Project Repositories\WARG\autonomy-bootcamp-2025-p2\documentation\multiprocess_example\concatenator\concatenator.py | run_concatenation | 33] Run
+07:48:40: [INFO] Hello 3020 world!
