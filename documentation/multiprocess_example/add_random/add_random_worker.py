@@ -11,7 +11,7 @@ from utilities.workers import worker_controller
 from . import add_random
 
 
-def add_random_worker(  # pylint: disable=too-many-instance-attributes, R0917
+def add_random_worker(  # pylint: disable=too-many-instance-attributes, too-many-arguments
     seed: int,
     max_random_term: int,
     add_change_count: int,

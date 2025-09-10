@@ -17,7 +17,7 @@ class AddRandom:
     """
 
     def __init__(
-        # pylint: disable=too-many-instance-attributes, too-many-arguments,R0917
+        # pylint: disable=too-many-instance-attributes, too-many-arguments
         self,
         seed: int,
         max_random_term: int,
