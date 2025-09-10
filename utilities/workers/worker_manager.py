@@ -9,7 +9,7 @@ from utilities.workers import worker_controller
 from utilities.workers import queue_proxy_wrapper
 
 
-class WorkerProperties:  # pylint: disable=too-many-instance-attributes, R0917, R1711
+class WorkerProperties:
     """
     Worker Properties.
     """
@@ -70,7 +70,9 @@ class WorkerProperties:  # pylint: disable=too-many-instance-attributes, R0917, 
         """
         Private constructor, use create() method.
         """
-        assert class_private_create_key is WorkerProperties.__create_key, "Use create() method"
+        assert class_private_create_key is WorkerProperties.__create_key, (
+            "Use create() method"
+        )
 
         self.__count = count
         self.__target = target
@@ -169,7 +171,9 @@ class WorkerManager:
         """
         Private constructor, use create() method.
         """
-        assert class_private_create_key is WorkerManager.__create_key, "Use create() method"
+        assert class_private_create_key is WorkerManager.__create_key, (
+            "Use create() method"
+        )
 
         self.__workers = workers
         self.__worker_properties = worker_properties
@@ -225,7 +229,9 @@ class WorkerManager:
                 continue
 
             # Log dead worker
-            target_and_worker_name = f"{self.__worker_properties.get_target_name()} {worker.name}"
+            target_and_worker_name = (
+                f"{self.__worker_properties.get_target_name()} {worker.name}"
+            )
             self.__local_logger.warning(
                 f"Worker died, restarting {target_and_worker_name}",
                 True,
@@ -238,7 +244,9 @@ class WorkerManager:
                 self.__local_logger,
             )
             if not result:
-                self.__local_logger.error(f"Failed to restart {target_and_worker_name}", True)
+                self.__local_logger.error(
+                    f"Failed to restart {target_and_worker_name}", True
+                )
                 return False
 
             # Append the new worker
