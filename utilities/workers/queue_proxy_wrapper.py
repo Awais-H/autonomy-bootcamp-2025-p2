@@ -19,9 +19,7 @@ class QueueProxyWrapper:
     __QUEUE_TIMEOUT = 0.1  # seconds
     __QUEUE_DELAY = 0.1  # seconds
 
-    def __init__(
-        self, mp_manager: multiprocessing.managers.SyncManager, maxsize: int = 0
-    ) -> None:
+    def __init__(self, mp_manager: multiprocessing.managers.SyncManager, maxsize: int = 0) -> None:
         self.queue = mp_manager.Queue(maxsize)
         self.maxsize = maxsize
 
