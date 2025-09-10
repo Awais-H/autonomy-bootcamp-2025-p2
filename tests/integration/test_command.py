@@ -59,6 +59,8 @@ def stop(
     """
     Stop the workers.
     """
+    if args:
+        args[0].put("stop")
 
 
 def read_queue(
@@ -151,8 +153,12 @@ def main() -> int:
     # Test cases, DO NOT EDIT!
     path = [
         # Test singular points
-        telemetry.TelemetryData(x=0, y=0, z=29, yaw=0, x_velocity=0, y_velocity=0, z_velocity=4),
-        telemetry.TelemetryData(x=0, y=0, z=31, yaw=0, x_velocity=0, y_velocity=0, z_velocity=-2),
+        telemetry.TelemetryData(
+            x=0, y=0, z=29, yaw=0, x_velocity=0, y_velocity=0, z_velocity=4
+        ),
+        telemetry.TelemetryData(
+            x=0, y=0, z=31, yaw=0, x_velocity=0, y_velocity=0, z_velocity=-2
+        ),
         telemetry.TelemetryData(
             x=0,
             y=0,
@@ -199,9 +205,15 @@ def main() -> int:
             z_velocity=0,
         ),  # -2 degrees
         # Fly a 30x30 square counter-clockwise
-        telemetry.TelemetryData(x=0, y=0, z=30, yaw=0, x_velocity=0, y_velocity=20, z_velocity=0),
-        telemetry.TelemetryData(x=10, y=0, z=30, yaw=0, x_velocity=0, y_velocity=20, z_velocity=0),
-        telemetry.TelemetryData(x=20, y=0, z=30, yaw=0, x_velocity=0, y_velocity=20, z_velocity=0),
+        telemetry.TelemetryData(
+            x=0, y=0, z=30, yaw=0, x_velocity=0, y_velocity=20, z_velocity=0
+        ),
+        telemetry.TelemetryData(
+            x=10, y=0, z=30, yaw=0, x_velocity=0, y_velocity=20, z_velocity=0
+        ),
+        telemetry.TelemetryData(
+            x=20, y=0, z=30, yaw=0, x_velocity=0, y_velocity=20, z_velocity=0
+        ),
         telemetry.TelemetryData(
             x=30, y=0, z=30, yaw=math.pi / 2, x_velocity=20, y_velocity=0, z_velocity=0
         ),
@@ -257,9 +269,15 @@ def main() -> int:
         telemetry.TelemetryData(
             x=0, y=20, z=30, yaw=math.pi / 2, x_velocity=0, y_velocity=20, z_velocity=0
         ),
-        telemetry.TelemetryData(x=0, y=30, z=30, yaw=0, x_velocity=20, y_velocity=0, z_velocity=0),
-        telemetry.TelemetryData(x=10, y=30, z=30, yaw=0, x_velocity=20, y_velocity=0, z_velocity=0),
-        telemetry.TelemetryData(x=20, y=30, z=30, yaw=0, x_velocity=20, y_velocity=0, z_velocity=0),
+        telemetry.TelemetryData(
+            x=0, y=30, z=30, yaw=0, x_velocity=20, y_velocity=0, z_velocity=0
+        ),
+        telemetry.TelemetryData(
+            x=10, y=30, z=30, yaw=0, x_velocity=20, y_velocity=0, z_velocity=0
+        ),
+        telemetry.TelemetryData(
+            x=20, y=30, z=30, yaw=0, x_velocity=20, y_velocity=0, z_velocity=0
+        ),
         telemetry.TelemetryData(
             x=30,
             y=30,
@@ -309,7 +327,9 @@ def main() -> int:
     ).start()
 
     # Read the main queue (worker outputs)
-    threading.Thread(target=read_queue, args=([command_output_queue], main_logger)).start()
+    threading.Thread(
+        target=read_queue, args=([command_output_queue], main_logger)
+    ).start()
 
     command_worker.command_worker(
         # Pass the telemetry input queue to the command worker
