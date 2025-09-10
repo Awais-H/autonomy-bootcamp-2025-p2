@@ -68,7 +68,7 @@ class Command:  # pylint: disable=too-many-instance-attributes
         self._distance_traveled = 0.0
         self._start_time = time.time()
 
-    def run(self, telemetry_data: telemetry.TelemetryData):
+    def run(self, telemetry_data: telemetry.TelemetryData) -> str | None:
         """
         Make a decision based on received telemetry data.
         """

@@ -32,7 +32,9 @@ class HeartbeatReceiver:
         try:
             return True, cls(cls.__private_key, connection, local_logger)
         except (OSError, mavutil.mavlink.MAVError) as e:
-            local_logger.error(f"Failed to create HeartbeatReceiver due to MAVLink/OS error: {e}")
+            local_logger.error(
+                f"Failed to create HeartbeatReceiver due to MAVLink/OS error: {e}"
+            )
             return False, None
 
     def __init__(
@@ -48,14 +50,16 @@ class HeartbeatReceiver:
         self._missing_count = 0
         self._status = "Disconnected"
 
-    def run(self):
+    def run(self) -> str:
         """
         Attempt to receive a heartbeat message.
         If disconnected for over a threshold number of periods,
         the connection is considered disconnected.
         """
         try:
-            msg = self._connection.recv_match(type="HEARTBEAT", blocking=False, timeout=1.0)
+            msg = self._connection.recv_match(
+                type="HEARTBEAT", blocking=False, timeout=1.0
+            )
 
             if msg:
                 self._last_heartbeat_time = time.time()
@@ -67,7 +71,9 @@ class HeartbeatReceiver:
                 time_since_last_heartbeat = time.time() - self._last_heartbeat_time
                 if time_since_last_heartbeat >= 1.0:
                     self._missing_count += 1
-                    self._local_logger.warning(f"Missed a heartbeat. Count: {self._missing_count}")
+                    self._local_logger.warning(
+                        f"Missed a heartbeat. Count: {self._missing_count}"
+                    )
 
             if self._missing_count >= self.max_threshold:
                 if self._status != "Disconnected":

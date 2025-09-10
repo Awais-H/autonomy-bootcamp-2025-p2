@@ -102,7 +102,7 @@ class Telemetry:  # pylint: disable=too-many-instance-attributes
 
     def run(
         self,
-    ):
+    ) -> TelemetryData | None:
         """
         Receive LOCAL_POSITION_NED and ATTITUDE messages from the drone,
         combining them together to form a single TelemetryData object.
