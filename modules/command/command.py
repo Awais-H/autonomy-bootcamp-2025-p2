@@ -43,7 +43,7 @@ class Command:  # pylint: disable=too-many-instance-attributes
         connection: mavutil.mavfile,
         target: Position,
         local_logger: logger.Logger,
-    ):
+    ) -> None:
         """
         Falliable create (instantiation) method to create a Command object.
         """
@@ -83,7 +83,9 @@ class Command:  # pylint: disable=too-many-instance-attributes
             elapsed_time = time.time() - self._start_time
             if elapsed_time > 0:
                 average_speed = self._distance_traveled / elapsed_time
-                self._local_logger.info(f"Average speed so far: {average_speed:.2f} m/s")
+                self._local_logger.info(
+                    f"Average speed so far: {average_speed:.2f} m/s"
+                )
 
         self._previous_telemetry_data = telemetry_data
 
@@ -106,7 +108,9 @@ class Command:  # pylint: disable=too-many-instance-attributes
                 )
                 return f"CHANGE ALTITUDE: {delta_altitude:.2f}"
             except (OSError, mavutil.mavlink.MAVError) as e:
-                self._local_logger.error(f"Failed to send MAV_CMD_CONDITION_CHANGE_ALT: {e}")
+                self._local_logger.error(
+                    f"Failed to send MAV_CMD_CONDITION_CHANGE_ALT: {e}"
+                )
 
         # Adjust yaw if off by more than 5 degrees
         target_yaw_rad = math.atan2(
