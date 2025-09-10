@@ -2,10 +2,10 @@
 Heartbeat receiving logic.
 """
 
+import time
 from pymavlink import mavutil
 
 from ..common.modules.logger import logger
-import time
 
 
 # =================================================================================================
@@ -82,7 +82,7 @@ class HeartbeatReceiver:
                         f"Connection status: Disconnected. Heart beats went past {self.max_threshold} heartbeats."
                     )
 
-        except Exception as e:
+        except (OSError, mavutil.mavlink.MAVError) as e:
             self._local_logger.error(f"Error in HeartbeatReceiver.run: {e}")
 
         return self._status

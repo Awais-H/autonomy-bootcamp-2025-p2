@@ -3,12 +3,12 @@ Decision-making logic.
 """
 
 import math
+import time
 
 from pymavlink import mavutil
 
 from ..common.modules.logger import logger
 from ..telemetry import telemetry
-import time
 
 
 class Position:

@@ -69,7 +69,7 @@ def command_worker(
             if command_string:
                 output_queue.queue.put(command_string)
 
-        except Exception as e:
+        except (OSError, mavutil.mavlink.MAVError) as e:
             local_logger.error(f"Error in command worker loop: {e}")
 
 

@@ -65,7 +65,7 @@ class TelemetryData:  # pylint: disable=too-many-instance-attributes
 # =================================================================================================
 #                            ↓ BOOTCAMPERS MODIFY BELOW THIS COMMENT ↓
 # =================================================================================================
-class Telemetry:
+class Telemetry:  # pylint: disable=too-many-instance-attributes
     """
     Telemetry class to read position and attitude (orientation).
     """

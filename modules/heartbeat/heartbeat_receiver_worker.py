@@ -50,7 +50,7 @@ def heartbeat_receiver_worker(
     #                         ↓ BOOTCAMPERS MODIFY BELOW THIS COMMENT ↓
     # =============================================================================================
     # Instantiate class object (heartbeat_receiver.HeartbeatReceiver)
-    result, heartbeat_receiver_instance = heartbeat_receiver.HeartbeatReceiver(
+    result, heartbeat_receiver_instance = heartbeat_receiver.HeartbeatReceiver.create(
         connection, local_logger
     )
     if not result:
