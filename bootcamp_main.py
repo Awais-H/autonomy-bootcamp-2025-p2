@@ -39,13 +39,13 @@ TELEMETRY_OUTPUT_QUEUE_MAX_SIZE = 10
 COMMAND_OUTPUT_QUEUE_MAX_SIZE = 10
 
 # Set worker counts
-HEARTBEAT_SENDER_WORKER_COUNT = 1
 HEARTBEAT_RECEIVER_WORKER_COUNT = 1
+HEARTBEAT_SENDER_WORKER_COUNT = 1
 TELEMETRY_WORKER_COUNT = 1
 COMMAND_WORKER_COUNT = 1
 
 # Any other constants
-TARGET = command.Position(10, 20, 30)
+TARGET = command.Position(10, 10, 10)
 MAIN_PROCESS_RUN_TIME = 100
 # =================================================================================================
 #                         ↑ BOOTCAMPERS MODIFY ABOVE THIS COMMENT ↑
