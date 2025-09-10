@@ -60,7 +60,7 @@ def heartbeat_sender_worker(
 
         time.sleep(1)
 
-    local_logger.info("Worke finished.", True)
+    local_logger.info("Worker finished.", True)
 
 
 # =================================================================================================

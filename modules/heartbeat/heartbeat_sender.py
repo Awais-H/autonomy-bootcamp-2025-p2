@@ -26,7 +26,13 @@ class HeartbeatSender:
         """
         Falliable create (instantiation) method to create a HeartbeatSender object.
         """
-        pass  # Create a HeartbeatSender object
+        try:
+            return True, cls(cls.__private_key, connection, local_logger)
+        except (OSError, mavutil.mavlink.MAVError) as e:
+            local_logger.error(
+                f"Failed to create HeartbeatSender due to MAVLink/OS error: {e}"
+            )
+            return False, None
 
     def __init__(
         self,
@@ -55,7 +61,7 @@ class HeartbeatSender:
                 system_status=mavutil.mavlink.MAV_STATE_ACTIVE,
             )
             self._local_logger.info("Heartbeat sent.")
-        except Exception as e:
+        except (OSError, mavutil.mavlink.MAVError) as e:
             self._local_logger.error(f"Failed to send heartbeat: {e}")
 
 

@@ -60,7 +60,7 @@ def telemetry_worker(
             telemetry_data = telemetry_instance.run()
             if telemetry_data:
                 output_queue.queue.put(telemetry_data)
-        except Exception as e:
+        except (OSError, mavutil.mavlink.MAVError) as e:
             local_logger.error(f"Error in telemetry worker loop: {e}")
 
         time.sleep(0.01)

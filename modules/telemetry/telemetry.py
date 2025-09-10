@@ -84,8 +84,10 @@ class Telemetry:
         """
         try:
             return True, cls(cls.__private_key, connection, local_logger)
-        except Exception as e:
-            local_logger.error(f"Failed to create Telemetry object: {e}")
+        except (OSError, mavutil.mavlink.MAVError) as e:
+            local_logger.error(
+                f"Failed to create Command object due to MAVLink/OS error: {e}"
+            )
             return False, None
 
     def __init__(
