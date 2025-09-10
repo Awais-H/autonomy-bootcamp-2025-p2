@@ -134,9 +134,7 @@ def main() -> int:
 
     # Prepare processes
     # Data path: countup_worker to add_random_worker to concatenator_workers
-    worker_managers: list[
-        worker_manager.WorkerManager
-    ] = []  # List of all worker managers
+    worker_managers: list[worker_manager.WorkerManager] = []  # List of all worker managers
 
     result, countup_manager = worker_manager.WorkerManager.create(
         worker_properties=countup_worker_properties,
