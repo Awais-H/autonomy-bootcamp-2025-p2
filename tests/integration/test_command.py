@@ -54,7 +54,7 @@ def start_drone() -> None:
 #                         ↓ BOOTCAMPERS MODIFY BELOW THIS COMMENT ↓
 # =================================================================================================
 def stop(
-    args,
+    args: tuple[worker_controller.WorkerController],
 ) -> None:
     """
     Stop the workers.
@@ -64,7 +64,7 @@ def stop(
 
 
 def read_queue(
-    args,
+    args: tuple[queue_proxy_wrapper.QueueProxyWrapper],
     main_logger: logger.Logger,
 ) -> None:
     """
@@ -82,7 +82,7 @@ def read_queue(
 
 
 def put_queue(
-    args,
+    args: tuple[list, queue_proxy_wrapper.QueueProxyWrapper],
 ) -> None:
     """
     Place mocked inputs into the input queue periodically with period TELEMETRY_PERIOD.
