@@ -9,7 +9,7 @@ from pymavlink import mavutil
 from ..common.modules.logger import logger
 
 
-class TelemetryData:  # pylint: disable=too-many-instance-attributes, too-many-arguments,R0917
+class TelemetryData:  # pylint: disable=too-many-instance-attributes, too-many-arguments
     """
     Python struct to represent Telemtry Data. Contains the most recent attitude and position reading.
     """
@@ -84,7 +84,9 @@ class Telemetry:  # pylint: disable=too-many-instance-attributes
         try:
             return True, cls(cls.__private_key, connection, local_logger)
         except (OSError, mavutil.mavlink.MAVError) as e:
-            local_logger.error(f"Failed to create Command object due to MAVLink/OS error: {e}")
+            local_logger.error(
+                f"Failed to create Command object due to MAVLink/OS error: {e}"
+            )
             return False, None
 
     def __init__(
