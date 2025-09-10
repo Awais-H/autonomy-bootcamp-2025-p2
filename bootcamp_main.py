@@ -138,16 +138,14 @@ def main() -> int:
         return -1
 
     # Heartbeat receiver
-    result, heartbeat_receiver_worker_properties = (
-        worker_manager.WorkerProperties.create(
-            target=heartbeat_receiver_worker.heartbeat_receiver_worker,
-            count=HEARTBEAT_RECEIVER_WORKER_COUNT,
-            work_arguments=(connection,),
-            input_queues=[],
-            output_queues=[heartbeat_receiver_output_queue],
-            controller=main_controller,
-            local_logger=main_logger,
-        )
+    result, heartbeat_receiver_worker_properties = worker_manager.WorkerProperties.create(
+        target=heartbeat_receiver_worker.heartbeat_receiver_worker,
+        count=HEARTBEAT_RECEIVER_WORKER_COUNT,
+        work_arguments=(connection,),
+        input_queues=[],
+        output_queues=[heartbeat_receiver_output_queue],
+        controller=main_controller,
+        local_logger=main_logger,
     )
     if not result:
         return -1
@@ -215,9 +213,7 @@ def main() -> int:
         telemetry_output_queue,
         command_output_queue,
     ]
-    while (
-        time.time() - start_time
-    ) < MAIN_PROCESS_RUN_TIME and connection.target_system != 0:
+    while (time.time() - start_time) < MAIN_PROCESS_RUN_TIME and connection.target_system != 0:
         for output_queue in all_queues:
             while True:
                 try:
