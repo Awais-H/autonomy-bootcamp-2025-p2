@@ -1,0 +1,28 @@
+02:42:52: [INFO] [D:\Repositories\Project Repositories\WARG\autonomy-bootcamp-2025-p2\modules\common\modules\logger\logger_main_setup.py | setup_main_logger | 62] main logger initialized
+02:42:53: [INFO] [D:\Repositories\Project Repositories\WARG\autonomy-bootcamp-2025-p2\tests\integration\test_command.py | main | 134] Connected!
+02:42:54: [INFO] [D:\Repositories\Project Repositories\WARG\autonomy-bootcamp-2025-p2\tests\integration\test_command.py | read_queue | 77] Command worker output: CHANGE ALTITUDE: 1.00
+02:42:54: [INFO] [D:\Repositories\Project Repositories\WARG\autonomy-bootcamp-2025-p2\tests\integration\test_command.py | read_queue | 77] Command worker output: CHANGE ALTITUDE: -1.00
+02:42:57: [INFO] [D:\Repositories\Project Repositories\WARG\autonomy-bootcamp-2025-p2\tests\integration\test_command.py | read_queue | 77] Command worker output: CHANGE YAW: 63.43
+02:42:58: [INFO] [D:\Repositories\Project Repositories\WARG\autonomy-bootcamp-2025-p2\tests\integration\test_command.py | read_queue | 77] Command worker output: CHANGE YAW: 90.00
+02:42:58: [INFO] [D:\Repositories\Project Repositories\WARG\autonomy-bootcamp-2025-p2\tests\integration\test_command.py | read_queue | 77] Command worker output: CHANGE YAW: 116.57
+02:42:59: [INFO] [D:\Repositories\Project Repositories\WARG\autonomy-bootcamp-2025-p2\tests\integration\test_command.py | read_queue | 77] Command worker output: CHANGE YAW: 45.00
+02:42:59: [INFO] [D:\Repositories\Project Repositories\WARG\autonomy-bootcamp-2025-p2\tests\integration\test_command.py | read_queue | 77] Command worker output: CHANGE YAW: 63.43
+02:43:00: [INFO] [D:\Repositories\Project Repositories\WARG\autonomy-bootcamp-2025-p2\tests\integration\test_command.py | read_queue | 77] Command worker output: CHANGE YAW: 90.00
+02:43:00: [INFO] [D:\Repositories\Project Repositories\WARG\autonomy-bootcamp-2025-p2\tests\integration\test_command.py | read_queue | 77] Command worker output: CHANGE YAW: 26.57
+02:43:01: [INFO] [D:\Repositories\Project Repositories\WARG\autonomy-bootcamp-2025-p2\tests\integration\test_command.py | read_queue | 77] Command worker output: CHANGE YAW: 45.00
+02:43:01: [INFO] [D:\Repositories\Project Repositories\WARG\autonomy-bootcamp-2025-p2\tests\integration\test_command.py | read_queue | 77] Command worker output: CHANGE YAW: 90.00
+02:43:02: [INFO] [D:\Repositories\Project Repositories\WARG\autonomy-bootcamp-2025-p2\tests\integration\test_command.py | read_queue | 77] Command worker output: CHANGE YAW: 45.00
+02:43:02: [INFO] [D:\Repositories\Project Repositories\WARG\autonomy-bootcamp-2025-p2\tests\integration\test_command.py | read_queue | 77] Command worker output: CHANGE YAW: 90.00
+02:43:03: [INFO] [D:\Repositories\Project Repositories\WARG\autonomy-bootcamp-2025-p2\tests\integration\test_command.py | read_queue | 77] Command worker output: CHANGE YAW: 135.00
+02:43:03: [INFO] [D:\Repositories\Project Repositories\WARG\autonomy-bootcamp-2025-p2\tests\integration\test_command.py | read_queue | 77] Command worker output: CHANGE YAW: -26.57
+02:43:04: [INFO] [D:\Repositories\Project Repositories\WARG\autonomy-bootcamp-2025-p2\tests\integration\test_command.py | read_queue | 77] Command worker output: CHANGE YAW: -45.00
+02:43:04: [INFO] [D:\Repositories\Project Repositories\WARG\autonomy-bootcamp-2025-p2\tests\integration\test_command.py | read_queue | 77] Command worker output: CHANGE YAW: -90.00
+02:43:05: [INFO] [D:\Repositories\Project Repositories\WARG\autonomy-bootcamp-2025-p2\tests\integration\test_command.py | read_queue | 77] Command worker output: CHANGE YAW: -45.00
+02:43:05: [INFO] [D:\Repositories\Project Repositories\WARG\autonomy-bootcamp-2025-p2\tests\integration\test_command.py | read_queue | 77] Command worker output: CHANGE YAW: -90.00
+02:43:06: [INFO] [D:\Repositories\Project Repositories\WARG\autonomy-bootcamp-2025-p2\tests\integration\test_command.py | read_queue | 77] Command worker output: CHANGE YAW: -135.00
+02:43:06: [INFO] [D:\Repositories\Project Repositories\WARG\autonomy-bootcamp-2025-p2\tests\integration\test_command.py | read_queue | 77] Command worker output: CHANGE YAW: -63.43
+02:43:07: [INFO] [D:\Repositories\Project Repositories\WARG\autonomy-bootcamp-2025-p2\tests\integration\test_command.py | read_queue | 77] Command worker output: CHANGE YAW: -90.00
+02:43:07: [INFO] [D:\Repositories\Project Repositories\WARG\autonomy-bootcamp-2025-p2\tests\integration\test_command.py | read_queue | 77] Command worker output: CHANGE YAW: -116.57
+02:43:08: [INFO] [D:\Repositories\Project Repositories\WARG\autonomy-bootcamp-2025-p2\tests\integration\test_command.py | read_queue | 77] Command worker output: CHANGE YAW: -45.00
+02:43:08: [INFO] [D:\Repositories\Project Repositories\WARG\autonomy-bootcamp-2025-p2\tests\integration\test_command.py | read_queue | 77] Command worker output: CHANGE YAW: -63.43
+02:43:09: [INFO] [D:\Repositories\Project Repositories\WARG\autonomy-bootcamp-2025-p2\tests\integration\test_command.py | read_queue | 77] Command worker output: CHANGE YAW: -90.00

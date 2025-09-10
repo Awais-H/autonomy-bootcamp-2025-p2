@@ -25,12 +25,12 @@ NUM_TRIALS = 5
 NUM_FAILS = 3
 
 # =================================================================================================
-#                            ↓ BOOTCAMPERS MODIFY BELOW THIS COMMENT ↓
+#                         ↓ BOOTCAMPERS MODIFY BELOW THIS COMMENT ↓
 # =================================================================================================
 # Add your own constants here
-
+TEST_DURATION = 15  # Adjust as needed
 # =================================================================================================
-#                            ↑ BOOTCAMPERS MODIFY ABOVE THIS COMMENT ↑
+#                         ↑ BOOTCAMPERS MODIFY ABOVE THIS COMMENT ↑
 # =================================================================================================
 
 
@@ -44,29 +44,38 @@ def start_drone() -> None:
 
 
 # =================================================================================================
-#                            ↓ BOOTCAMPERS MODIFY BELOW THIS COMMENT ↓
+#                         ↓ BOOTCAMPERS MODIFY BELOW THIS COMMENT ↓
 # =================================================================================================
 def stop(
-    args,  # Add any necessary arguments
+    args,
 ) -> None:
     """
     Stop the workers.
     """
-    pass  # Add logic to stop your worker
+    if args:
+        args[0].put("stop")
 
 
 def read_queue(
-    args,  # Add any necessary arguments
+    args,
     main_logger: logger.Logger,
 ) -> None:
     """
     Read and print the output queue.
     """
-    pass  # Add logic to read from your worker's output queue and print it using the logger
+    while True:
+        try:
+            # This will block until an item is available
+            item = args[0].get(timeout=1)
+            if item == "stop":
+                break
+            main_logger.info(f"Telemetry worker output: {item}")
+        except mp.queues.Empty:
+            pass
 
 
 # =================================================================================================
-#                            ↑ BOOTCAMPERS MODIFY ABOVE THIS COMMENT ↑
+#                         ↑ BOOTCAMPERS MODIFY ABOVE THIS COMMENT ↑
 # =================================================================================================
 
 
@@ -107,26 +116,32 @@ def main() -> int:
     # pylint: enable=duplicate-code
 
     # =============================================================================================
-    #                          ↓ BOOTCAMPERS MODIFY BELOW THIS COMMENT ↓
+    #                         ↓ BOOTCAMPERS MODIFY BELOW THIS COMMENT ↓
     # =============================================================================================
     # Mock starting a worker, since cannot actually start a new process
     # Create a worker controller for your worker
+    telemetry_worker_controller = worker_controller.WorkerController()
 
     # Create a multiprocess manager for synchronized queues
+    manager = mp.Manager()
 
     # Create your queues
+    telemetry_output_queue = queue_proxy_wrapper.QueueProxyWrapper(manager.Queue())
 
     # Just set a timer to stop the worker after a while, since the worker infinite loops
-    threading.Timer(TELEMETRY_PERIOD * NUM_TRIALS * 2 + NUM_FAILS, stop, (args,)).start()
+    threading.Timer(TEST_DURATION, stop, ([telemetry_worker_controller],)).start()
 
     # Read the main queue (worker outputs)
-    threading.Thread(target=read_queue, args=(args, main_logger)).start()
+    threading.Thread(target=read_queue, args=([telemetry_output_queue], main_logger)).start()
 
     telemetry_worker.telemetry_worker(
         # Put your own arguments here
+        controller=telemetry_worker_controller,
+        connection=connection,
+        output_queue=telemetry_output_queue,
     )
     # =============================================================================================
-    #                          ↑ BOOTCAMPERS MODIFY ABOVE THIS COMMENT ↑
+    #                         ↑ BOOTCAMPERS MODIFY ABOVE THIS COMMENT ↑
     # =============================================================================================
 
     return 0

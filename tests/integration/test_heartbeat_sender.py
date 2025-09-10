@@ -23,12 +23,12 @@ HEARTBEAT_PERIOD = 1
 NUM_TRIALS = 10
 
 # =================================================================================================
-#                            ↓ BOOTCAMPERS MODIFY BELOW THIS COMMENT ↓
+#                         ↓ BOOTCAMPERS MODIFY BELOW THIS COMMENT ↓
 # =================================================================================================
 # Add your own constants here
-
+TEST_DURATION = NUM_TRIALS
 # =================================================================================================
-#                            ↑ BOOTCAMPERS MODIFY ABOVE THIS COMMENT ↑
+#                         ↑ BOOTCAMPERS MODIFY ABOVE THIS COMMENT ↑
 # =================================================================================================
 
 
@@ -42,19 +42,20 @@ def start_drone() -> None:
 
 
 # =================================================================================================
-#                            ↓ BOOTCAMPERS MODIFY BELOW THIS COMMENT ↓
+#                         ↓ BOOTCAMPERS MODIFY BELOW THIS COMMENT ↓
 # =================================================================================================
 def stop(
-    args,  # Add any necessary arguments
+    args,
 ) -> None:
     """
     Stop the workers.
     """
-    pass  # Add logic to stop your worker
+    if args:
+        args[0].put("stop")
 
 
 # =================================================================================================
-#                            ↑ BOOTCAMPERS MODIFY ABOVE THIS COMMENT ↑
+#                         ↑ BOOTCAMPERS MODIFY ABOVE THIS COMMENT ↑
 # =================================================================================================
 
 
@@ -89,19 +90,22 @@ def main() -> int:
     # pylint: enable=duplicate-code
 
     # =============================================================================================
-    #                          ↓ BOOTCAMPERS MODIFY BELOW THIS COMMENT ↓
+    #                         ↓ BOOTCAMPERS MODIFY BELOW THIS COMMENT ↓
     # =============================================================================================
     # Mock starting a worker, since cannot actually start a new process
     # Create a worker controller for your worker
+    heartbeat_sender_worker_controller = worker_controller.WorkerController()
 
     # Just set a timer to stop the worker after a while, since the worker infinite loops
-    threading.Timer(HEARTBEAT_PERIOD * NUM_TRIALS, stop, (args,)).start()
+    threading.Timer(TEST_DURATION, stop, ([heartbeat_sender_worker_controller],)).start()
 
     heartbeat_sender_worker.heartbeat_sender_worker(
         # Place your own arguments here
+        controller=heartbeat_sender_worker_controller,
+        connection=connection,
     )
     # =============================================================================================
-    #                          ↑ BOOTCAMPERS MODIFY ABOVE THIS COMMENT ↑
+    #                         ↑ BOOTCAMPERS MODIFY ABOVE THIS COMMENT ↑
     # =============================================================================================
 
     return 0
