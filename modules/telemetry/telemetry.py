@@ -82,31 +82,73 @@ class Telemetry:
         """
         Falliable create (instantiation) method to create a Telemetry object.
         """
-        pass  # Create a Telemetry object
+        try:
+            return True, cls(cls.__private_key, connection, local_logger)
+        except Exception as e:
+            local_logger.error(f"Failed to create Telemetry object: {e}")
+            return False, None
 
     def __init__(
         self,
         key: object,
         connection: mavutil.mavfile,
-        args,  # Put your own arguments here
         local_logger: logger.Logger,
     ) -> None:
         assert key is Telemetry.__private_key, "Use create() method"
-
-        # Do any intializiation here
+        # Do any initialization here
+        self._connection = connection
+        self._local_logger = local_logger
+        self._last_position = None
+        self._last_attitude = None
 
     def run(
         self,
-        args,  # Put your own arguments here
     ):
         """
         Receive LOCAL_POSITION_NED and ATTITUDE messages from the drone,
         combining them together to form a single TelemetryData object.
         """
-        # Read MAVLink message LOCAL_POSITION_NED (32)
-        # Read MAVLink message ATTITUDE (30)
-        # Return the most recent of both, and use the most recent message's timestamp
-        pass
+        start_time = time.time()
+
+        # Set to smaller than 1.0, as 1.0s is the timeout
+        while start_time < 1.0:
+            msg = self._connection.recv_match(
+                type=["ATTITUDE", "LOCAL_POSITION_NED"], blocking=False, timeout=0.0
+            )
+            if msg:
+                if msg.get_type() == "ATTITUDE":
+                    self._last_attitude = msg
+                elif msg.get_type() == "LOCAL_POSITION_NED":
+                    self._last_position = msg
+
+            if self._last_position and self._last_attitude:
+                telemetry_data = TelemetryData()
+
+                if self._last_position.time_boot_ms > self._last_attitude.time_boot_ms:
+                    telemetry_data.time_since_boot = self._last_position.time_boot_ms
+                else:
+                    telemetry_data.time_since_boot = self._last_attitude.time_boot_ms
+
+                telemetry_data.x = self._last_position.x
+                telemetry_data.y = self._last_position.y
+                telemetry_data.z = self._last_position.z
+                telemetry_data.x_velocity = self._last_position.vx
+                telemetry_data.y_velocity = self._last_position.vy
+                telemetry_data.z_velocity = self._last_position.vz
+
+                telemetry_data.roll = self._last_attitude.roll
+                telemetry_data.pitch = self._last_attitude.pitch
+                telemetry_data.yaw = self._last_attitude.yaw
+                telemetry_data.roll_speed = self._last_attitude.rollspeed
+                telemetry_data.pitch_speed = self._last_attitude.pitchspeed
+                telemetry_data.yaw_speed = self._last_attitude.yawspeed
+
+                self._last_position = None
+                self._last_attitude = None
+
+                return telemetry_data
+
+        return None
 
 
 # =================================================================================================

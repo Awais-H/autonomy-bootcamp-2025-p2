@@ -4,6 +4,7 @@ Telemtry worker that gathers GPS data.
 
 import os
 import pathlib
+import time
 
 from pymavlink import mavutil
 
@@ -14,20 +15,22 @@ from ..common.modules.logger import logger
 
 
 # =================================================================================================
-#                            ↓ BOOTCAMPERS MODIFY BELOW THIS COMMENT ↓
+#                         ↓ BOOTCAMPERS MODIFY BELOW THIS COMMENT ↓
 # =================================================================================================
 def telemetry_worker(
     connection: mavutil.mavfile,
-    args,  # Place your own arguments here
-    # Add other necessary worker arguments here
+    output_queue: queue_proxy_wrapper.QueueProxyWrapper,
+    controller: worker_controller.WorkerController,
 ) -> None:
     """
     Worker process.
 
-    args... describe what the arguments are
+    connection is the MAVLink connection to the drone.
+    output_queue is the data queue to pass TelemetryData to.
+    controller is how the main process communicates to this worker process.
     """
     # =============================================================================================
-    #                          ↑ BOOTCAMPERS MODIFY ABOVE THIS COMMENT ↑
+    #                         ↑ BOOTCAMPERS MODIFY ABOVE THIS COMMENT ↑
     # =============================================================================================
 
     # Instantiate logger
@@ -44,13 +47,27 @@ def telemetry_worker(
     local_logger.info("Logger initialized", True)
 
     # =============================================================================================
-    #                          ↓ BOOTCAMPERS MODIFY BELOW THIS COMMENT ↓
+    #                         ↓ BOOTCAMPERS MODIFY BELOW THIS COMMENT ↓
     # =============================================================================================
     # Instantiate class object (telemetry.Telemetry)
+    result, telemetry_instance = telemetry.Telemetry.create(connection, local_logger)
 
     # Main loop: do work.
+    while not controller.is_exit_requested():
+        controller.check_pause()
+
+        try:
+            telemetry_data = telemetry_instance.run()
+            if telemetry_data:
+                output_queue.queue.put(telemetry_data)
+        except Exception as e:
+            local_logger.error(f"Error in telemetry worker loop: {e}")
+
+        time.sleep(0.01)
+
+    local_logger.info("Worker has been terminated.", True)
 
 
 # =================================================================================================
-#                            ↑ BOOTCAMPERS MODIFY ABOVE THIS COMMENT ↑
+#                         ↑ BOOTCAMPERS MODIFY ABOVE THIS COMMENT ↑
 # =================================================================================================
