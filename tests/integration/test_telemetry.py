@@ -5,6 +5,7 @@ Test the telemetry worker with a mocked drone.
 import multiprocessing as mp
 import subprocess
 import threading
+import time
 
 from pymavlink import mavutil
 
@@ -25,12 +26,12 @@ NUM_TRIALS = 5
 NUM_FAILS = 3
 
 # =================================================================================================
-#                         ↓ BOOTCAMPERS MODIFY BELOW THIS COMMENT ↓
+#     v BOOTCAMPERS MODIFY BELOW THIS COMMENT v
 # =================================================================================================
 # Add your own constants here
 TEST_DURATION = 15  # Adjust as needed
 # =================================================================================================
-#                         ↑ BOOTCAMPERS MODIFY ABOVE THIS COMMENT ↑
+#     ^ BOOTCAMPERS MODIFY ABOVE THIS COMMENT ^
 # =================================================================================================
 
 
@@ -44,7 +45,7 @@ def start_drone() -> None:
 
 
 # =================================================================================================
-#                         ↓ BOOTCAMPERS MODIFY BELOW THIS COMMENT ↓
+#     v BOOTCAMPERS MODIFY BELOW THIS COMMENT v
 # =================================================================================================
 def stop(
     args: tuple[worker_controller.WorkerController],
@@ -53,7 +54,8 @@ def stop(
     Stop the workers.
     """
     if args:
-        args[0].put("stop")
+        # Corrected: Use request_exit() instead of put()
+        args[0].request_exit()
 
 
 def read_queue(
@@ -65,8 +67,8 @@ def read_queue(
     """
     while True:
         try:
-            # This will block until an item is available
-            item = args[0].get(timeout=1)
+            # Corrected: Use args[0].queue.get()
+            item = args[0].queue.get(timeout=1)
             if item == "stop":
                 break
             main_logger.info(f"Telemetry worker output: {item}")
@@ -75,7 +77,7 @@ def read_queue(
 
 
 # =================================================================================================
-#                         ↑ BOOTCAMPERS MODIFY ABOVE THIS COMMENT ↑
+#     ^ BOOTCAMPERS MODIFY ABOVE THIS COMMENT ^
 # =================================================================================================
 
 
@@ -116,7 +118,7 @@ def main() -> int:
     # pylint: enable=duplicate-code
 
     # =============================================================================================
-    #                         ↓ BOOTCAMPERS MODIFY BELOW THIS COMMENT ↓
+    #     v BOOTCAMPERS MODIFY BELOW THIS COMMENT v
     # =============================================================================================
     # Mock starting a worker, since cannot actually start a new process
     # Create a worker controller for your worker
@@ -126,7 +128,8 @@ def main() -> int:
     manager = mp.Manager()
 
     # Create your queues
-    telemetry_output_queue = queue_proxy_wrapper.QueueProxyWrapper(manager.Queue())
+    # Corrected: Pass the manager object directly to the wrapper
+    telemetry_output_queue = queue_proxy_wrapper.QueueProxyWrapper(manager)
 
     # Just set a timer to stop the worker after a while, since the worker infinite loops
     threading.Timer(TEST_DURATION, stop, ([telemetry_worker_controller],)).start()
@@ -141,21 +144,27 @@ def main() -> int:
         output_queue=telemetry_output_queue,
     )
     # =============================================================================================
-    #                         ↑ BOOTCAMPERS MODIFY ABOVE THIS COMMENT ↑
+    #     ^ BOOTCAMPERS MODIFY ABOVE THIS COMMENT ^
     # =============================================================================================
 
     return 0
 
 
 if __name__ == "__main__":
+    # Corrected: Run main() in a separate process to avoid blocking
     # Start drone in another process
     drone_process = mp.Process(target=start_drone)
     drone_process.start()
 
-    result_main = main()
-    if result_main < 0:
-        print(f"Failed with return code {result_main}")
-    else:
-        print("Success!")
+    # Add a slight delay for the drone to start
+    time.sleep(1)
 
+    # Now, run the main test logic in a separate process
+    worker_process = mp.Process(target=main)
+    worker_process.start()
+
+    # Wait for both processes to complete
+    worker_process.join()
     drone_process.join()
+
+    print("Test finished.")

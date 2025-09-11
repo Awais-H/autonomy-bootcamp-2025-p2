@@ -9,7 +9,8 @@ from pymavlink import mavutil
 from ..common.modules.logger import logger
 
 
-class TelemetryData:  # pylint: disable=too-many-instance-attributes, too-many-arguments
+# pylint: disable=too-many-instance-attributes, too-many-arguments
+class TelemetryData:
     """
     Python struct to represent Telemtry Data. Contains the most recent attitude and position reading.
     """

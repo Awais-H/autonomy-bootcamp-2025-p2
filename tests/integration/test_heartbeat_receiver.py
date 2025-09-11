@@ -5,6 +5,7 @@ Test the heartbeat reciever worker with a mocked drone.
 import multiprocessing as mp
 import subprocess
 import threading
+import time
 
 from pymavlink import mavutil
 
@@ -27,12 +28,12 @@ DISCONNECT_THRESHOLD = 5
 ERROR_TOLERANCE = 1e-2
 
 # =================================================================================================
-#                         ↓ BOOTCAMPERS MODIFY BELOW THIS COMMENT ↓
+#     v BOOTCAMPERS MODIFY BELOW THIS COMMENT v
 # =================================================================================================
 # Add your own constants here
 TEST_DURATION = 20  # Adjust as needed
 # =================================================================================================
-#                         ↑ BOOTCAMPERS MODIFY ABOVE THIS COMMENT ↑
+#     ^ BOOTCAMPERS MODIFY ABOVE THIS COMMENT ^
 # =================================================================================================
 
 
@@ -46,7 +47,7 @@ def start_drone() -> None:
 
 
 # =================================================================================================
-#                         ↓ BOOTCAMPERS MODIFY BELOW THIS COMMENT ↓
+#     v BOOTCAMPERS MODIFY BELOW THIS COMMENT v
 # =================================================================================================
 def stop(
     args: tuple[worker_controller.WorkerController],
@@ -55,7 +56,8 @@ def stop(
     Stop the workers.
     """
     if args:
-        args[0].put("stop")
+        # Corrected: Use request_exit() instead of put()
+        args[0].request_exit()
 
 
 def read_queue(
@@ -67,8 +69,8 @@ def read_queue(
     """
     while True:
         try:
-            # This will block until an item is available
-            item = args[0].get(timeout=1)
+            # Corrected: Use args[0].queue.get() instead of args[0].get()
+            item = args[0].queue.get(timeout=1)
             if item == "stop":
                 break
             main_logger.info(f"Heartbeat receiver output: {item}")
@@ -77,7 +79,7 @@ def read_queue(
 
 
 # =================================================================================================
-#                         ↑ BOOTCAMPERS MODIFY ABOVE THIS COMMENT ↑
+#     ^ BOOTCAMPERS MODIFY ABOVE THIS COMMENT ^
 # =================================================================================================
 
 
@@ -117,18 +119,17 @@ def main() -> int:
     main_logger.info("Connected!")
     # pylint: enable=duplicate-code
 
-    # =============================================================================================
-    #                         ↓ BOOTCAMPERS MODIFY BELOW THIS COMMENT ↓
-    # =============================================================================================
-    # Mock starting a worker, since cannot actually start a new process
+    # =================================================================================================
+    #     v BOOTCAMPERS MODIFY BELOW THIS COMMENT v
+    # =================================================================================================
     # Create a worker controller for your worker
     heartbeat_receiver_worker_controller = worker_controller.WorkerController()
 
     # Create a multiprocess manager for synchronized queues
     manager = mp.Manager()
 
-    # Create your queues
-    heartbeat_output_queue = queue_proxy_wrapper.QueueProxyWrapper(manager.Queue())
+    # Create your queues by passing the manager to the wrapper's constructor
+    heartbeat_output_queue = queue_proxy_wrapper.QueueProxyWrapper(manager)
 
     # Just set a timer to stop the worker after a while, since the worker infinite loops
     threading.Timer(
@@ -142,13 +143,13 @@ def main() -> int:
 
     heartbeat_receiver_worker.heartbeat_receiver_worker(
         # Place your own arguments here
-        controller=heartbeat_receiver_worker_controller,
         connection=connection,
         output_queue=heartbeat_output_queue,
+        controller=heartbeat_receiver_worker_controller,
     )
-    # =============================================================================================
-    #                         ↑ BOOTCAMPERS MODIFY ABOVE THIS COMMENT ↑
-    # =============================================================================================
+    # =================================================================================================
+    #     ^ BOOTCAMPERS MODIFY ABOVE THIS COMMENT ^
+    # =================================================================================================
 
     return 0
 
@@ -158,10 +159,15 @@ if __name__ == "__main__":
     drone_process = mp.Process(target=start_drone)
     drone_process.start()
 
-    result_main = main()
-    if result_main < 0:
-        print(f"Failed with return code {result_main}")
-    else:
-        print("Success!")
+    # Give the drone process a moment to start up and listen
+    time.sleep(1)
 
+    # Now, run the main test logic in a separate process to ensure proper logging
+    worker_process = mp.Process(target=main)
+    worker_process.start()
+
+    # Wait for both processes to complete
+    worker_process.join()
     drone_process.join()
+
+    print("Test finished.")

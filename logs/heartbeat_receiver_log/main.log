@@ -1,0 +1,23 @@
+20:50:07: [INFO] [D:\Repositories\Project Repositories\WARG\autonomy-bootcamp-2025-p2\modules\common\modules\logger\logger_main_setup.py | setup_main_logger | 62] main logger initialized
+20:50:07: [INFO] [D:\Repositories\Project Repositories\WARG\autonomy-bootcamp-2025-p2\tests\integration\test_heartbeat_receiver.py | main | 119] Connected!
+20:50:08: [INFO] [D:\Repositories\Project Repositories\WARG\autonomy-bootcamp-2025-p2\tests\integration\test_heartbeat_receiver.py | read_queue | 76] Heartbeat receiver output: Connected
+20:50:09: [INFO] [D:\Repositories\Project Repositories\WARG\autonomy-bootcamp-2025-p2\tests\integration\test_heartbeat_receiver.py | read_queue | 76] Heartbeat receiver output: Connected
+20:50:10: [INFO] [D:\Repositories\Project Repositories\WARG\autonomy-bootcamp-2025-p2\tests\integration\test_heartbeat_receiver.py | read_queue | 76] Heartbeat receiver output: Connected
+20:50:11: [INFO] [D:\Repositories\Project Repositories\WARG\autonomy-bootcamp-2025-p2\tests\integration\test_heartbeat_receiver.py | read_queue | 76] Heartbeat receiver output: Connected
+20:50:12: [INFO] [D:\Repositories\Project Repositories\WARG\autonomy-bootcamp-2025-p2\tests\integration\test_heartbeat_receiver.py | read_queue | 76] Heartbeat receiver output: Connected
+20:50:13: [INFO] [D:\Repositories\Project Repositories\WARG\autonomy-bootcamp-2025-p2\tests\integration\test_heartbeat_receiver.py | read_queue | 76] Heartbeat receiver output: Connected
+20:50:14: [INFO] [D:\Repositories\Project Repositories\WARG\autonomy-bootcamp-2025-p2\tests\integration\test_heartbeat_receiver.py | read_queue | 76] Heartbeat receiver output: Connected
+20:50:15: [INFO] [D:\Repositories\Project Repositories\WARG\autonomy-bootcamp-2025-p2\tests\integration\test_heartbeat_receiver.py | read_queue | 76] Heartbeat receiver output: Disconnected
+20:50:16: [INFO] [D:\Repositories\Project Repositories\WARG\autonomy-bootcamp-2025-p2\tests\integration\test_heartbeat_receiver.py | read_queue | 76] Heartbeat receiver output: Disconnected
+20:50:17: [INFO] [D:\Repositories\Project Repositories\WARG\autonomy-bootcamp-2025-p2\tests\integration\test_heartbeat_receiver.py | read_queue | 76] Heartbeat receiver output: Disconnected
+20:50:18: [INFO] [D:\Repositories\Project Repositories\WARG\autonomy-bootcamp-2025-p2\tests\integration\test_heartbeat_receiver.py | read_queue | 76] Heartbeat receiver output: Disconnected
+20:50:19: [INFO] [D:\Repositories\Project Repositories\WARG\autonomy-bootcamp-2025-p2\tests\integration\test_heartbeat_receiver.py | read_queue | 76] Heartbeat receiver output: Disconnected
+20:50:20: [INFO] [D:\Repositories\Project Repositories\WARG\autonomy-bootcamp-2025-p2\tests\integration\test_heartbeat_receiver.py | read_queue | 76] Heartbeat receiver output: Disconnected
+20:50:21: [INFO] [D:\Repositories\Project Repositories\WARG\autonomy-bootcamp-2025-p2\tests\integration\test_heartbeat_receiver.py | read_queue | 76] Heartbeat receiver output: Connected
+20:50:22: [INFO] [D:\Repositories\Project Repositories\WARG\autonomy-bootcamp-2025-p2\tests\integration\test_heartbeat_receiver.py | read_queue | 76] Heartbeat receiver output: Connected
+20:50:23: [INFO] [D:\Repositories\Project Repositories\WARG\autonomy-bootcamp-2025-p2\tests\integration\test_heartbeat_receiver.py | read_queue | 76] Heartbeat receiver output: Connected
+20:50:24: [INFO] [D:\Repositories\Project Repositories\WARG\autonomy-bootcamp-2025-p2\tests\integration\test_heartbeat_receiver.py | read_queue | 76] Heartbeat receiver output: Connected
+20:50:25: [INFO] [D:\Repositories\Project Repositories\WARG\autonomy-bootcamp-2025-p2\tests\integration\test_heartbeat_receiver.py | read_queue | 76] Heartbeat receiver output: Connected
+20:50:26: [INFO] [D:\Repositories\Project Repositories\WARG\autonomy-bootcamp-2025-p2\tests\integration\test_heartbeat_receiver.py | read_queue | 76] Heartbeat receiver output: Connected
+20:50:27: [INFO] [D:\Repositories\Project Repositories\WARG\autonomy-bootcamp-2025-p2\tests\integration\test_heartbeat_receiver.py | read_queue | 76] Heartbeat receiver output: Connected
+20:50:28: [INFO] [D:\Repositories\Project Repositories\WARG\autonomy-bootcamp-2025-p2\tests\integration\test_heartbeat_receiver.py | read_queue | 76] Heartbeat receiver output: Connected

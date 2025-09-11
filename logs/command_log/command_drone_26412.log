@@ -1,0 +1,2 @@
+20:53:40: [INFO] [D:\Repositories\Project Repositories\WARG\autonomy-bootcamp-2025-p2\tests\integration\mock_drones\command_drone.py | main | 45] Logger initialized
+20:53:40: [ERROR] [D:\Repositories\Project Repositories\WARG\autonomy-bootcamp-2025-p2\tests\integration\mock_drones\command_drone.py | main | 64] Altitude target is not the desired value: 1.0

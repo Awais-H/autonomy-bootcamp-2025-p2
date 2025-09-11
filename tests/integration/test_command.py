@@ -7,6 +7,8 @@ import multiprocessing as mp
 import subprocess
 import threading
 import time
+import os
+import pathlib
 
 from pymavlink import mavutil
 
@@ -47,6 +49,16 @@ def start_drone() -> None:
     """
     Start the mocked drone.
     """
+    drone_name = pathlib.Path(MOCK_DRONE_MODULE).stem
+    process_id = os.getpid()
+    result, drone_logger = logger.Logger.create(f"{drone_name}_{process_id}", True)
+    if not result:
+        print("ERROR: Drone failed to create logger")
+        return
+
+    assert drone_logger is not None
+    drone_logger.info("Drone logger initialized.")
+
     subprocess.run(["python", "-m", MOCK_DRONE_MODULE], shell=True, check=False)
 
 
@@ -60,7 +72,7 @@ def stop(
     Stop the workers.
     """
     if args:
-        args[0].put("stop")
+        args[0].request_exit()
 
 
 def read_queue(
@@ -72,8 +84,7 @@ def read_queue(
     """
     while True:
         try:
-            # This will block until an item is available
-            item = args[0].queue.get(timeout=1)  # Fixed: Added .queue
+            item = args[0].queue.get(timeout=1)
             if item == "stop":
                 break
             main_logger.info(f"Command worker output: {item}")
@@ -91,7 +102,7 @@ def put_queue(
     telemetry_input_queue = args[1]
 
     for point in path:
-        telemetry_input_queue.queue.put(point)  # Fixed: Added .queue
+        telemetry_input_queue.queue.put(point)
         time.sleep(TELEMETRY_PERIOD)
 
 
@@ -138,8 +149,7 @@ def main() -> int:
 
     # =============================================================================================
     #                         ↓ BOOTCAMPERS MODIFY BELOW THIS COMMENT ↓
-    # =============================================================================================
-    # Mock starting a worker, since cannot actually start a new process
+    # =================================================================================================
     # Create a worker controller for your worker
     command_worker_controller = worker_controller.WorkerController()
 
@@ -323,7 +333,7 @@ def main() -> int:
     )
     # =============================================================================================
     #                         ↑ BOOTCAMPERS MODIFY ABOVE THIS COMMENT ↑
-    # =============================================================================================
+    # =================================================================================================
 
     return 0
 

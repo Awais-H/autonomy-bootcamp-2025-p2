@@ -5,6 +5,7 @@ Test the heartbeat sender worker with a mocked drone.
 import multiprocessing as mp
 import subprocess
 import threading
+import time
 
 from pymavlink import mavutil
 
@@ -23,12 +24,12 @@ HEARTBEAT_PERIOD = 1
 NUM_TRIALS = 10
 
 # =================================================================================================
-#                         ↓ BOOTCAMPERS MODIFY BELOW THIS COMMENT ↓
+#     v BOOTCAMPERS MODIFY BELOW THIS COMMENT v
 # =================================================================================================
 # Add your own constants here
 TEST_DURATION = NUM_TRIALS
 # =================================================================================================
-#                         ↑ BOOTCAMPERS MODIFY ABOVE THIS COMMENT ↑
+#     ^ BOOTCAMPERS MODIFY ABOVE THIS COMMENT ^
 # =================================================================================================
 
 
@@ -42,7 +43,7 @@ def start_drone() -> None:
 
 
 # =================================================================================================
-#                         ↓ BOOTCAMPERS MODIFY BELOW THIS COMMENT ↓
+#     v BOOTCAMPERS MODIFY BELOW THIS COMMENT v
 # =================================================================================================
 def stop(
     args: tuple[worker_controller.WorkerController],
@@ -51,11 +52,11 @@ def stop(
     Stop the workers.
     """
     if args:
-        args[0].put("stop")
+        args[0].request_exit()
 
 
 # =================================================================================================
-#                         ↑ BOOTCAMPERS MODIFY ABOVE THIS COMMENT ↑
+#     ^ BOOTCAMPERS MODIFY ABOVE THIS COMMENT ^
 # =================================================================================================
 
 
@@ -69,7 +70,6 @@ def main() -> int:
         print("ERROR: Failed to load configuration file")
         return -1
 
-    # Get Pylance to stop complaining
     assert config is not None
 
     # Setup main logger
@@ -78,48 +78,45 @@ def main() -> int:
         print("ERROR: Failed to create main logger")
         return -1
 
-    # Get Pylance to stop complaining
     assert main_logger is not None
 
     # Mocked GCS, connect to mocked drone which is listening at CONNECTION_STRING
     # source_system = 255 (groundside)
     # source_component = 0 (ground control station)
     connection = mavutil.mavlink_connection(CONNECTION_STRING)
-    # Don't send another heartbeat since the worker will do so
+
     main_logger.info("Connected!")
     # pylint: enable=duplicate-code
 
     # =============================================================================================
-    #                         ↓ BOOTCAMPERS MODIFY BELOW THIS COMMENT ↓
+    #     v BOOTCAMPERS MODIFY BELOW THIS COMMENT v
     # =============================================================================================
-    # Mock starting a worker, since cannot actually start a new process
     # Create a worker controller for your worker
     heartbeat_sender_worker_controller = worker_controller.WorkerController()
 
-    # Just set a timer to stop the worker after a while, since the worker infinite loops
     threading.Timer(TEST_DURATION, stop, ([heartbeat_sender_worker_controller],)).start()
 
     heartbeat_sender_worker.heartbeat_sender_worker(
-        # Place your own arguments here
         controller=heartbeat_sender_worker_controller,
         connection=connection,
     )
     # =============================================================================================
-    #                         ↑ BOOTCAMPERS MODIFY ABOVE THIS COMMENT ↑
+    #     ^ BOOTCAMPERS MODIFY ABOVE THIS COMMENT ^
     # =============================================================================================
 
     return 0
 
 
 if __name__ == "__main__":
-    # Start drone in another process
     drone_process = mp.Process(target=start_drone)
     drone_process.start()
 
-    result_main = main()
-    if result_main < 0:
-        print(f"Failed with return code {result_main}")
-    else:
-        print("Success!")
+    time.sleep(1)
 
+    worker_process = mp.Process(target=main)
+    worker_process.start()
+
+    worker_process.join()
     drone_process.join()
+
+    print("Test finished.")

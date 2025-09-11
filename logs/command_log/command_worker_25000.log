@@ -1,0 +1,33 @@
+20:53:40: [INFO] [D:\Repositories\Project Repositories\WARG\autonomy-bootcamp-2025-p2\modules\command\command_worker.py | command_worker | 47] Logger initialized
+20:53:41: [INFO] [D:\Repositories\Project Repositories\WARG\autonomy-bootcamp-2025-p2\modules\command\command.py | run | 86] Average speed so far: 4.00 m/s
+20:53:41: [INFO] [D:\Repositories\Project Repositories\WARG\autonomy-bootcamp-2025-p2\modules\command\command.py | run | 86] Average speed so far: 2.80 m/s
+20:53:42: [INFO] [D:\Repositories\Project Repositories\WARG\autonomy-bootcamp-2025-p2\modules\command\command.py | run | 86] Average speed so far: 2.13 m/s
+20:53:42: [INFO] [D:\Repositories\Project Repositories\WARG\autonomy-bootcamp-2025-p2\modules\command\command.py | run | 86] Average speed so far: 1.70 m/s
+20:53:43: [INFO] [D:\Repositories\Project Repositories\WARG\autonomy-bootcamp-2025-p2\modules\command\command.py | run | 86] Average speed so far: 1.36 m/s
+20:53:43: [INFO] [D:\Repositories\Project Repositories\WARG\autonomy-bootcamp-2025-p2\modules\command\command.py | run | 86] Average speed so far: 1.13 m/s
+20:53:44: [INFO] [D:\Repositories\Project Repositories\WARG\autonomy-bootcamp-2025-p2\modules\command\command.py | run | 86] Average speed so far: 0.97 m/s
+20:53:44: [INFO] [D:\Repositories\Project Repositories\WARG\autonomy-bootcamp-2025-p2\modules\command\command.py | run | 86] Average speed so far: 3.34 m/s
+20:53:45: [INFO] [D:\Repositories\Project Repositories\WARG\autonomy-bootcamp-2025-p2\modules\command\command.py | run | 86] Average speed so far: 5.19 m/s
+20:53:45: [INFO] [D:\Repositories\Project Repositories\WARG\autonomy-bootcamp-2025-p2\modules\command\command.py | run | 86] Average speed so far: 6.67 m/s
+20:53:46: [INFO] [D:\Repositories\Project Repositories\WARG\autonomy-bootcamp-2025-p2\modules\command\command.py | run | 86] Average speed so far: 7.87 m/s
+20:53:46: [INFO] [D:\Repositories\Project Repositories\WARG\autonomy-bootcamp-2025-p2\modules\command\command.py | run | 86] Average speed so far: 8.88 m/s
+20:53:47: [INFO] [D:\Repositories\Project Repositories\WARG\autonomy-bootcamp-2025-p2\modules\command\command.py | run | 86] Average speed so far: 9.73 m/s
+20:53:47: [INFO] [D:\Repositories\Project Repositories\WARG\autonomy-bootcamp-2025-p2\modules\command\command.py | run | 86] Average speed so far: 10.46 m/s
+20:53:48: [INFO] [D:\Repositories\Project Repositories\WARG\autonomy-bootcamp-2025-p2\modules\command\command.py | run | 86] Average speed so far: 11.10 m/s
+20:53:48: [INFO] [D:\Repositories\Project Repositories\WARG\autonomy-bootcamp-2025-p2\modules\command\command.py | run | 86] Average speed so far: 11.65 m/s
+20:53:49: [INFO] [D:\Repositories\Project Repositories\WARG\autonomy-bootcamp-2025-p2\modules\command\command.py | run | 86] Average speed so far: 12.14 m/s
+20:53:49: [INFO] [D:\Repositories\Project Repositories\WARG\autonomy-bootcamp-2025-p2\modules\command\command.py | run | 86] Average speed so far: 12.57 m/s
+20:53:50: [INFO] [D:\Repositories\Project Repositories\WARG\autonomy-bootcamp-2025-p2\modules\command\command.py | run | 86] Average speed so far: 12.96 m/s
+20:53:50: [INFO] [D:\Repositories\Project Repositories\WARG\autonomy-bootcamp-2025-p2\modules\command\command.py | run | 86] Average speed so far: 13.31 m/s
+20:53:51: [INFO] [D:\Repositories\Project Repositories\WARG\autonomy-bootcamp-2025-p2\modules\command\command.py | run | 86] Average speed so far: 13.63 m/s
+20:53:51: [INFO] [D:\Repositories\Project Repositories\WARG\autonomy-bootcamp-2025-p2\modules\command\command.py | run | 86] Average speed so far: 13.92 m/s
+20:53:52: [INFO] [D:\Repositories\Project Repositories\WARG\autonomy-bootcamp-2025-p2\modules\command\command.py | run | 86] Average speed so far: 14.18 m/s
+20:53:52: [INFO] [D:\Repositories\Project Repositories\WARG\autonomy-bootcamp-2025-p2\modules\command\command.py | run | 86] Average speed so far: 14.42 m/s
+20:53:53: [INFO] [D:\Repositories\Project Repositories\WARG\autonomy-bootcamp-2025-p2\modules\command\command.py | run | 86] Average speed so far: 14.64 m/s
+20:53:53: [INFO] [D:\Repositories\Project Repositories\WARG\autonomy-bootcamp-2025-p2\modules\command\command.py | run | 86] Average speed so far: 14.84 m/s
+20:53:54: [INFO] [D:\Repositories\Project Repositories\WARG\autonomy-bootcamp-2025-p2\modules\command\command.py | run | 86] Average speed so far: 15.03 m/s
+20:53:54: [INFO] [D:\Repositories\Project Repositories\WARG\autonomy-bootcamp-2025-p2\modules\command\command.py | run | 86] Average speed so far: 15.21 m/s
+20:53:55: [INFO] [D:\Repositories\Project Repositories\WARG\autonomy-bootcamp-2025-p2\modules\command\command.py | run | 86] Average speed so far: 15.37 m/s
+20:53:55: [INFO] [D:\Repositories\Project Repositories\WARG\autonomy-bootcamp-2025-p2\modules\command\command.py | run | 86] Average speed so far: 15.53 m/s
+20:53:56: [INFO] [D:\Repositories\Project Repositories\WARG\autonomy-bootcamp-2025-p2\modules\command\command_worker.py | command_worker | 73] Queue is empty. All tasks completed.
+20:53:56: [INFO] [D:\Repositories\Project Repositories\WARG\autonomy-bootcamp-2025-p2\modules\command\command_worker.py | command_worker | 78] Command worker finished successfully.
