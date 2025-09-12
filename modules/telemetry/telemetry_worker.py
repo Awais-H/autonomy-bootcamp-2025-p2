@@ -1,5 +1,5 @@
 """
-Telemtry worker that gathers GPS data.
+Telemetry worker that gathers GPS data.
 """
 
 import os
@@ -11,11 +11,11 @@ from pymavlink import mavutil
 from utilities.workers import queue_proxy_wrapper
 from utilities.workers import worker_controller
 from . import telemetry
-from ..common.modules.logger import logger
+from modules.common.modules.logger import logger
 
 
 # =================================================================================================
-#                         ↓ BOOTCAMPERS MODIFY BELOW THIS COMMENT ↓
+#           ↓ BOOTCAMPERS MODIFY BELOW THIS COMMENT ↓
 # =================================================================================================
 def telemetry_worker(
     connection: mavutil.mavfile,
@@ -30,7 +30,7 @@ def telemetry_worker(
     controller is how the main process communicates to this worker process.
     """
     # =============================================================================================
-    #                         ↑ BOOTCAMPERS MODIFY ABOVE THIS COMMENT ↑
+    #           ↑ BOOTCAMPERS MODIFY ABOVE THIS COMMENT ↑
     # =============================================================================================
 
     # Instantiate logger
@@ -47,10 +47,13 @@ def telemetry_worker(
     local_logger.info("Logger initialized", True)
 
     # =============================================================================================
-    #                         ↓ BOOTCAMPERS MODIFY BELOW THIS COMMENT ↓
+    #           ↓ BOOTCAMPERS MODIFY BELOW THIS COMMENT ↓
     # =============================================================================================
     # Instantiate class object (telemetry.Telemetry)
     result, telemetry_instance = telemetry.Telemetry.create(connection, local_logger)
+    if not result:
+        local_logger.error("Failed to create telemetry instance.")
+        return
 
     # Main loop: do work.
     while not controller.is_exit_requested():
@@ -59,6 +62,7 @@ def telemetry_worker(
         try:
             telemetry_data = telemetry_instance.run()
             if telemetry_data:
+                local_logger.info("Telemetry data received and processed.")
                 output_queue.queue.put(telemetry_data)
         except (OSError, mavutil.mavlink.MAVError) as e:
             local_logger.error(f"Error in telemetry worker loop: {e}")
@@ -69,5 +73,5 @@ def telemetry_worker(
 
 
 # =================================================================================================
-#                         ↑ BOOTCAMPERS MODIFY ABOVE THIS COMMENT ↑
+#           ↑ BOOTCAMPERS MODIFY ABOVE THIS COMMENT ↑
 # =================================================================================================

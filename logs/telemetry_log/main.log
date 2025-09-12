@@ -1,2 +1,317 @@
-21:08:11: [INFO] [D:\Repositories\Project Repositories\WARG\autonomy-bootcamp-2025-p2\modules\common\modules\logger\logger_main_setup.py | setup_main_logger | 62] main logger initialized
-21:08:11: [INFO] [D:\Repositories\Project Repositories\WARG\autonomy-bootcamp-2025-p2\tests\integration\test_telemetry.py | main | 117] Connected!
+01:23:32: [INFO] [D:\Repositories\Uni Repo\WARG\autonomy-bootcamp-2025-p2\modules\common\modules\logger\logger_main_setup.py | setup_main_logger | 62] main logger initialized
+01:23:32: [INFO] [D:\Repositories\Uni Repo\WARG\autonomy-bootcamp-2025-p2\tests\integration\test_telemetry.py | main | 115] Connected!
+01:23:33: [INFO] [D:\Repositories\Uni Repo\WARG\autonomy-bootcamp-2025-p2\tests\integration\test_telemetry.py | read_queue | 72] Telemetry worker output: {
+            time_since_boot: 0,
+            x: 0.0,
+            y: 0.0,
+            z: 0.0,
+            x_velocity: 1.0,
+            y_velocity: 0.0,
+            z_velocity: 0.0,
+            roll: 0.0,
+            pitch: 0.0,
+            yaw: 0.0,
+            roll_speed: 0.0,
+            pitch_speed: 0.0,
+            yaw_speed: 3.1415927410125732
+        }
+01:23:33: [INFO] [D:\Repositories\Uni Repo\WARG\autonomy-bootcamp-2025-p2\tests\integration\test_telemetry.py | read_queue | 72] Telemetry worker output: {
+            time_since_boot: 500,
+            x: 0.5,
+            y: 0.0,
+            z: 0.0,
+            x_velocity: 1.0,
+            y_velocity: 0.0,
+            z_velocity: 0.0,
+            roll: 0.0,
+            pitch: 0.0,
+            yaw: 1.0471975803375244,
+            roll_speed: 0.0,
+            pitch_speed: 0.0,
+            yaw_speed: 3.1415927410125732
+        }
+01:23:33: [INFO] [D:\Repositories\Uni Repo\WARG\autonomy-bootcamp-2025-p2\tests\integration\test_telemetry.py | read_queue | 72] Telemetry worker output: {
+            time_since_boot: 1000,
+            x: 1.0,
+            y: 0.0,
+            z: 0.0,
+            x_velocity: 1.0,
+            y_velocity: 0.0,
+            z_velocity: 0.0,
+            roll: 0.0,
+            pitch: 0.0,
+            yaw: 3.1415927410125732,
+            roll_speed: 0.0,
+            pitch_speed: 0.0,
+            yaw_speed: 3.1415927410125732
+        }
+01:23:34: [INFO] [D:\Repositories\Uni Repo\WARG\autonomy-bootcamp-2025-p2\tests\integration\test_telemetry.py | read_queue | 72] Telemetry worker output: {
+            time_since_boot: 1500,
+            x: 1.5,
+            y: 0.0,
+            z: 0.0,
+            x_velocity: 1.0,
+            y_velocity: 0.0,
+            z_velocity: 0.0,
+            roll: 0.0,
+            pitch: 0.0,
+            yaw: -2.094395160675049,
+            roll_speed: 0.0,
+            pitch_speed: 0.0,
+            yaw_speed: 3.1415927410125732
+        }
+01:23:34: [INFO] [D:\Repositories\Uni Repo\WARG\autonomy-bootcamp-2025-p2\tests\integration\test_telemetry.py | read_queue | 72] Telemetry worker output: {
+            time_since_boot: 2000,
+            x: 2.0,
+            y: 0.0,
+            z: 0.0,
+            x_velocity: 1.0,
+            y_velocity: 0.0,
+            z_velocity: 0.0,
+            roll: 0.0,
+            pitch: 0.0,
+            yaw: 0.0,
+            roll_speed: 0.0,
+            pitch_speed: 0.0,
+            yaw_speed: 3.1415927410125732
+        }
+01:23:35: [INFO] [D:\Repositories\Uni Repo\WARG\autonomy-bootcamp-2025-p2\tests\integration\test_telemetry.py | read_queue | 72] Telemetry worker output: {
+            time_since_boot: 2500,
+            x: 2.5,
+            y: 0.0,
+            z: 0.0,
+            x_velocity: 1.0,
+            y_velocity: 0.0,
+            z_velocity: 0.0,
+            roll: 0.0,
+            pitch: 0.0,
+            yaw: 1.0471975803375244,
+            roll_speed: 0.0,
+            pitch_speed: 0.0,
+            yaw_speed: 3.1415927410125732
+        }
+01:23:35: [INFO] [D:\Repositories\Uni Repo\WARG\autonomy-bootcamp-2025-p2\tests\integration\test_telemetry.py | read_queue | 72] Telemetry worker output: {
+            time_since_boot: 3000,
+            x: 3.0,
+            y: 0.0,
+            z: 0.0,
+            x_velocity: 1.0,
+            y_velocity: 0.0,
+            z_velocity: 0.0,
+            roll: 0.0,
+            pitch: 0.0,
+            yaw: 3.1415927410125732,
+            roll_speed: 0.0,
+            pitch_speed: 0.0,
+            yaw_speed: 3.1415927410125732
+        }
+01:23:36: [INFO] [D:\Repositories\Uni Repo\WARG\autonomy-bootcamp-2025-p2\tests\integration\test_telemetry.py | read_queue | 72] Telemetry worker output: {
+            time_since_boot: 3500,
+            x: 3.5,
+            y: 0.0,
+            z: 0.0,
+            x_velocity: 1.0,
+            y_velocity: 0.0,
+            z_velocity: 0.0,
+            roll: 0.0,
+            pitch: 0.0,
+            yaw: -2.094395160675049,
+            roll_speed: 0.0,
+            pitch_speed: 0.0,
+            yaw_speed: 3.1415927410125732
+        }
+01:23:36: [INFO] [D:\Repositories\Uni Repo\WARG\autonomy-bootcamp-2025-p2\tests\integration\test_telemetry.py | read_queue | 72] Telemetry worker output: {
+            time_since_boot: 4000,
+            x: 4.0,
+            y: 0.0,
+            z: 0.0,
+            x_velocity: 1.0,
+            y_velocity: 0.0,
+            z_velocity: 0.0,
+            roll: 0.0,
+            pitch: 0.0,
+            yaw: 0.0,
+            roll_speed: 0.0,
+            pitch_speed: 0.0,
+            yaw_speed: 3.1415927410125732
+        }
+01:23:37: [INFO] [D:\Repositories\Uni Repo\WARG\autonomy-bootcamp-2025-p2\tests\integration\test_telemetry.py | read_queue | 72] Telemetry worker output: {
+            time_since_boot: 4500,
+            x: 4.5,
+            y: 0.0,
+            z: 0.0,
+            x_velocity: 1.0,
+            y_velocity: 0.0,
+            z_velocity: 0.0,
+            roll: 0.0,
+            pitch: 0.0,
+            yaw: 1.0471975803375244,
+            roll_speed: 0.0,
+            pitch_speed: 0.0,
+            yaw_speed: 3.1415927410125732
+        }
+01:23:39: [INFO] [D:\Repositories\Uni Repo\WARG\autonomy-bootcamp-2025-p2\tests\integration\test_telemetry.py | read_queue | 72] Telemetry worker output: {
+            time_since_boot: 999,
+            x: 3.0,
+            y: 2.0,
+            z: 1.0,
+            x_velocity: 777.0,
+            y_velocity: 777.0,
+            z_velocity: 777.0,
+            roll: 1.0,
+            pitch: 2.0,
+            yaw: 3.0,
+            roll_speed: 555.0,
+            pitch_speed: 555.0,
+            yaw_speed: 555.0
+        }
+01:23:40: [INFO] [D:\Repositories\Uni Repo\WARG\autonomy-bootcamp-2025-p2\tests\integration\test_telemetry.py | read_queue | 72] Telemetry worker output: {
+            time_since_boot: 0,
+            x: 0.0,
+            y: 0.0,
+            z: 0.0,
+            x_velocity: 1.0,
+            y_velocity: 0.0,
+            z_velocity: 0.0,
+            roll: 0.0,
+            pitch: 0.0,
+            yaw: 0.0,
+            roll_speed: 0.0,
+            pitch_speed: 0.0,
+            yaw_speed: 3.1415927410125732
+        }
+01:23:41: [INFO] [D:\Repositories\Uni Repo\WARG\autonomy-bootcamp-2025-p2\tests\integration\test_telemetry.py | read_queue | 72] Telemetry worker output: {
+            time_since_boot: 500,
+            x: 0.3333333432674408,
+            y: 0.0,
+            z: 0.0,
+            x_velocity: 1.0,
+            y_velocity: 0.0,
+            z_velocity: 0.0,
+            roll: 0.0,
+            pitch: 0.0,
+            yaw: 1.5707963705062866,
+            roll_speed: 0.0,
+            pitch_speed: 0.0,
+            yaw_speed: 3.1415927410125732
+        }
+01:23:41: [INFO] [D:\Repositories\Uni Repo\WARG\autonomy-bootcamp-2025-p2\tests\integration\test_telemetry.py | read_queue | 72] Telemetry worker output: {
+            time_since_boot: 1000,
+            x: 0.6666666865348816,
+            y: 0.0,
+            z: 0.0,
+            x_velocity: 1.0,
+            y_velocity: 0.0,
+            z_velocity: 0.0,
+            roll: 0.0,
+            pitch: 0.0,
+            yaw: 3.1415927410125732,
+            roll_speed: 0.0,
+            pitch_speed: 0.0,
+            yaw_speed: 3.1415927410125732
+        }
+01:23:42: [INFO] [D:\Repositories\Uni Repo\WARG\autonomy-bootcamp-2025-p2\tests\integration\test_telemetry.py | read_queue | 72] Telemetry worker output: {
+            time_since_boot: 1500,
+            x: 1.3333333730697632,
+            y: 0.0,
+            z: 0.0,
+            x_velocity: 1.0,
+            y_velocity: 0.0,
+            z_velocity: 0.0,
+            roll: 0.0,
+            pitch: 0.0,
+            yaw: -1.5707963705062866,
+            roll_speed: 0.0,
+            pitch_speed: 0.0,
+            yaw_speed: 3.1415927410125732
+        }
+01:23:42: [INFO] [D:\Repositories\Uni Repo\WARG\autonomy-bootcamp-2025-p2\tests\integration\test_telemetry.py | read_queue | 72] Telemetry worker output: {
+            time_since_boot: 2000,
+            x: 1.6666666269302368,
+            y: 0.0,
+            z: 0.0,
+            x_velocity: 1.0,
+            y_velocity: 0.0,
+            z_velocity: 0.0,
+            roll: 0.0,
+            pitch: 0.0,
+            yaw: 0.0,
+            roll_speed: 0.0,
+            pitch_speed: 0.0,
+            yaw_speed: 3.1415927410125732
+        }
+01:23:43: [INFO] [D:\Repositories\Uni Repo\WARG\autonomy-bootcamp-2025-p2\tests\integration\test_telemetry.py | read_queue | 72] Telemetry worker output: {
+            time_since_boot: 2500,
+            x: 2.3333332538604736,
+            y: 0.0,
+            z: 0.0,
+            x_velocity: 1.0,
+            y_velocity: 0.0,
+            z_velocity: 0.0,
+            roll: 0.0,
+            pitch: 0.0,
+            yaw: 1.5707963705062866,
+            roll_speed: 0.0,
+            pitch_speed: 0.0,
+            yaw_speed: 3.1415927410125732
+        }
+01:23:43: [INFO] [D:\Repositories\Uni Repo\WARG\autonomy-bootcamp-2025-p2\tests\integration\test_telemetry.py | read_queue | 72] Telemetry worker output: {
+            time_since_boot: 3000,
+            x: 2.6666667461395264,
+            y: 0.0,
+            z: 0.0,
+            x_velocity: 1.0,
+            y_velocity: 0.0,
+            z_velocity: 0.0,
+            roll: 0.0,
+            pitch: 0.0,
+            yaw: 3.1415927410125732,
+            roll_speed: 0.0,
+            pitch_speed: 0.0,
+            yaw_speed: 3.1415927410125732
+        }
+01:23:44: [INFO] [D:\Repositories\Uni Repo\WARG\autonomy-bootcamp-2025-p2\tests\integration\test_telemetry.py | read_queue | 72] Telemetry worker output: {
+            time_since_boot: 3500,
+            x: 3.3333332538604736,
+            y: 0.0,
+            z: 0.0,
+            x_velocity: 1.0,
+            y_velocity: 0.0,
+            z_velocity: 0.0,
+            roll: 0.0,
+            pitch: 0.0,
+            yaw: -1.5707963705062866,
+            roll_speed: 0.0,
+            pitch_speed: 0.0,
+            yaw_speed: 3.1415927410125732
+        }
+01:23:44: [INFO] [D:\Repositories\Uni Repo\WARG\autonomy-bootcamp-2025-p2\tests\integration\test_telemetry.py | read_queue | 72] Telemetry worker output: {
+            time_since_boot: 4000,
+            x: 3.6666667461395264,
+            y: 0.0,
+            z: 0.0,
+            x_velocity: 1.0,
+            y_velocity: 0.0,
+            z_velocity: 0.0,
+            roll: 0.0,
+            pitch: 0.0,
+            yaw: 0.0,
+            roll_speed: 0.0,
+            pitch_speed: 0.0,
+            yaw_speed: 3.1415927410125732
+        }
+01:23:45: [INFO] [D:\Repositories\Uni Repo\WARG\autonomy-bootcamp-2025-p2\tests\integration\test_telemetry.py | read_queue | 72] Telemetry worker output: {
+            time_since_boot: 4500,
+            x: 4.333333492279053,
+            y: 0.0,
+            z: 0.0,
+            x_velocity: 1.0,
+            y_velocity: 0.0,
+            z_velocity: 0.0,
+            roll: 0.0,
+            pitch: 0.0,
+            yaw: 1.5707963705062866,
+            roll_speed: 0.0,
+            pitch_speed: 0.0,
+            yaw_speed: 3.1415927410125732
+        }

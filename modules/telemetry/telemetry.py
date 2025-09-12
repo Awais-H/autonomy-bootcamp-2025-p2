@@ -64,7 +64,7 @@ class TelemetryData:
 
 
 # =================================================================================================
-#                            ↓ BOOTCAMPERS MODIFY BELOW THIS COMMENT ↓
+#           ↓ BOOTCAMPERS MODIFY BELOW THIS COMMENT ↓
 # =================================================================================================
 class Telemetry:  # pylint: disable=too-many-instance-attributes
     """
@@ -80,7 +80,7 @@ class Telemetry:  # pylint: disable=too-many-instance-attributes
         local_logger: logger.Logger,
     ) -> "tuple[True, Telemetry] | tuple[False, None]":
         """
-        Falliable create (instantiation) method to create a Telemetry object.
+        Fallible create (instantiation) method to create a Telemetry object.
         """
         try:
             return True, cls(cls.__private_key, connection, local_logger)
@@ -111,7 +111,7 @@ class Telemetry:  # pylint: disable=too-many-instance-attributes
         start_time = time.time()
 
         # Set to smaller than 1.0, as 1.0s is the timeout
-        while start_time < 1.0:
+        while time.time() - start_time < 1.0:
             msg = self._connection.recv_match(
                 type=["ATTITUDE", "LOCAL_POSITION_NED"], blocking=False, timeout=0.0
             )
@@ -152,5 +152,5 @@ class Telemetry:  # pylint: disable=too-many-instance-attributes
 
 
 # =================================================================================================
-#                            ↑ BOOTCAMPERS MODIFY ABOVE THIS COMMENT ↑
+#           ↑ BOOTCAMPERS MODIFY ABOVE THIS COMMENT ↑
 # =================================================================================================

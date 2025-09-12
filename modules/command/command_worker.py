@@ -15,7 +15,7 @@ from ..common.modules.logger import logger
 
 
 # =================================================================================================
-#             ↓ BOOTCAMPERS MODIFY BELOW THIS COMMENT ↓
+#     v BOOTCAMPERS MODIFY BELOW THIS COMMENT v
 # =================================================================================================
 def command_worker(
     connection: mavutil.mavfile,
@@ -30,7 +30,7 @@ def command_worker(
     args... describe what the arguments are
     """
     # =============================================================================================
-    #             ↑ BOOTCAMPERS MODIFY ABOVE THIS COMMENT ↑
+    #     ^ BOOTCAMPERS MODIFY ABOVE THIS COMMENT ^
     # =============================================================================================
 
     # Instantiate logger
@@ -47,7 +47,7 @@ def command_worker(
     local_logger.info("Logger initialized", True)
 
     # =============================================================================================
-    #             ↓ BOOTCAMPERS MODIFY BELOW THIS COMMENT ↓
+    #     v BOOTCAMPERS MODIFY BELOW THIS COMMENT v
     # =================================================================================================
 
     # Instantiate class object (command.Command)
@@ -79,5 +79,5 @@ def command_worker(
 
 
 # =================================================================================================
-#             ↑ BOOTCAMPERS MODIFY ABOVE THIS COMMENT ↑
+#     ^ BOOTCAMPERS MODIFY ABOVE THIS COMMENT ^
 # =================================================================================================

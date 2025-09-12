@@ -16,7 +16,7 @@ class HeartbeatReceiver:
     HeartbeatReceiver class to send a heartbeat
     """
 
-    max_threshold = 3
+    max_threshold = 5
 
     __private_key = object()
 

@@ -23,7 +23,7 @@ class Position:
 
 
 # =================================================================================================
-#                         ↓ BOOTCAMPERS MODIFY BELOW THIS COMMENT ↓
+#           ↓ BOOTCAMPERS MODIFY BELOW THIS COMMENT ↓
 # =================================================================================================
 class Command:  # pylint: disable=too-many-instance-attributes
     """
@@ -65,25 +65,32 @@ class Command:  # pylint: disable=too-many-instance-attributes
         self._target = target
         self._local_logger = local_logger
         self._previous_telemetry_data = None
-        self._distance_traveled = 0.0
+        self._start_position = None  # Add this to store the start position
         self._start_time = time.time()
 
     def run(self, telemetry_data: telemetry.TelemetryData) -> str | None:
         """
         Make a decision based on received telemetry data.
         """
+        if self._start_position is None:
+            self._start_position = Position(telemetry_data.x, telemetry_data.y, telemetry_data.z)
+
         # Calculate average velocity
         if self._previous_telemetry_data:
-            delta_x = telemetry_data.x - self._previous_telemetry_data.x
-            delta_y = telemetry_data.y - self._previous_telemetry_data.y
-            delta_z = telemetry_data.z - self._previous_telemetry_data.z
-            distance_traveled = math.sqrt(delta_x**2 + delta_y**2 + delta_z**2)
-            self._distance_traveled += distance_traveled
-
             elapsed_time = time.time() - self._start_time
             if elapsed_time > 0:
-                average_speed = self._distance_traveled / elapsed_time
-                self._local_logger.info(f"Average speed so far: {average_speed:.2f} m/s")
+                delta_x = telemetry_data.x - self._start_position.x
+                delta_y = telemetry_data.y - self._start_position.y
+                delta_z = telemetry_data.z - self._start_position.z
+
+                # Calculate the magnitude of the displacement vector
+                total_displacement_magnitude = math.sqrt(delta_x**2 + delta_y**2 + delta_z**2)
+
+                # Calculate average velocity magnitude
+                average_velocity_magnitude = total_displacement_magnitude / elapsed_time
+                self._local_logger.info(
+                    f"Average velocity so far: {average_velocity_magnitude:.2f} m/s"
+                )
 
         self._previous_telemetry_data = telemetry_data
 
@@ -96,13 +103,13 @@ class Command:  # pylint: disable=too-many-instance-attributes
                     target_component=0,
                     command=mavutil.mavlink.MAV_CMD_CONDITION_CHANGE_ALT,
                     confirmation=0,
-                    param1=0,  # no relative altitude
+                    param1=1,
                     param2=0,
                     param3=0,
                     param4=0,
                     param5=0,
                     param6=0,
-                    param7=delta_altitude,  # meters
+                    param7=self._target.z,
                 )
                 return f"CHANGE ALTITUDE: {delta_altitude:.2f}"
             except (OSError, mavutil.mavlink.MAVError) as e:
@@ -126,10 +133,10 @@ class Command:  # pylint: disable=too-many-instance-attributes
                     target_component=0,
                     command=mavutil.mavlink.MAV_CMD_CONDITION_YAW,
                     confirmation=0,
-                    param1=delta_yaw_deg,  # degrees
-                    param2=10,  # turning speed, rad/s (doesn't matter what you put)
-                    param3=1,  # relative angle to current yaw
-                    param4=0,  # clockwise (0) or counter-clockwise (1)
+                    param1=delta_yaw_deg,
+                    param2=5,
+                    param3=1,
+                    param4=1,
                     param5=0,
                     param6=0,
                     param7=0,
@@ -143,5 +150,5 @@ class Command:  # pylint: disable=too-many-instance-attributes
 
 
 # =================================================================================================
-#                         ↑ BOOTCAMPERS MODIFY ABOVE THIS COMMENT ↑
+#           ↑ BOOTCAMPERS MODIFY ABOVE THIS COMMENT ↑
 # =================================================================================================
