@@ -10,8 +10,8 @@ from pymavlink import mavutil
 
 from utilities.workers import queue_proxy_wrapper
 from utilities.workers import worker_controller
-from . import telemetry
 from modules.common.modules.logger import logger
+from . import telemetry
 
 
 # =================================================================================================
