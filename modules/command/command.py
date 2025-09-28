@@ -3,7 +3,6 @@ Decision-making logic.
 """
 
 import math
-import time
 
 from pymavlink import mavutil
 
@@ -46,7 +45,14 @@ class Command:  # pylint: disable=too-many-instance-attributes
         Falliable create (instantiation) method to create a Command object.
         """
         try:
-            return True, cls(cls.__private_key, connection, target, local_logger, altitude_threshold, yaw_threshold_deg)
+            return True, cls(
+                cls.__private_key,
+                connection,
+                target,
+                local_logger,
+                altitude_threshold,
+                yaw_threshold_deg,
+            )
         except (OSError, mavutil.mavlink.MAVError) as e:
             local_logger.error(f"Failed to create Command object: {e}")
             return False, None

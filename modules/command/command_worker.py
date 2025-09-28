@@ -52,7 +52,9 @@ def command_worker(
     # =================================================================================================
 
     # Instantiate class object (command.Command)
-    result, command_instance = command.Command.create(connection, target, local_logger, altitude_threshold, yaw_threshold_deg)
+    result, command_instance = command.Command.create(
+        connection, target, local_logger, altitude_threshold, yaw_threshold_deg
+    )
     if not result:
         local_logger.error("Failed to create Command instance.")
         return
