@@ -308,7 +308,7 @@ def main() -> int:
     command_worker.command_worker(
         connection=connection,
         target=TARGET,
-        data_queue=data_queue,
+        input_queue=data_queue,
         output_queue=output_queue,
         controller=worker_controller_instance,
     )

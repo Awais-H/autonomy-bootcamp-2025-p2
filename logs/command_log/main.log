@@ -1,0 +1,28 @@
+15:02:29: [INFO] [D:\Repositories\Uni Repo\WARG\autonomy-bootcamp-2025-p2\modules\common\modules\logger\logger_main_setup.py | setup_main_logger | 62] main logger initialized
+15:02:30: [INFO] [D:\Repositories\Uni Repo\WARG\autonomy-bootcamp-2025-p2\tests\integration\test_command.py | main | 130] Connected!
+15:02:31: [INFO] [D:\Repositories\Uni Repo\WARG\autonomy-bootcamp-2025-p2\tests\integration\test_command.py | read_queue | 78] CHANGE_ALTITUDE: 1.00
+15:02:31: [INFO] [D:\Repositories\Uni Repo\WARG\autonomy-bootcamp-2025-p2\tests\integration\test_command.py | read_queue | 78] CHANGE_ALTITUDE: -1.00
+15:02:34: [INFO] [D:\Repositories\Uni Repo\WARG\autonomy-bootcamp-2025-p2\tests\integration\test_command.py | read_queue | 78] CHANGING_YAW: 63.43
+15:02:35: [INFO] [D:\Repositories\Uni Repo\WARG\autonomy-bootcamp-2025-p2\tests\integration\test_command.py | read_queue | 78] CHANGING_YAW: 90.00
+15:02:35: [INFO] [D:\Repositories\Uni Repo\WARG\autonomy-bootcamp-2025-p2\tests\integration\test_command.py | read_queue | 78] CHANGING_YAW: 116.57
+15:02:36: [INFO] [D:\Repositories\Uni Repo\WARG\autonomy-bootcamp-2025-p2\tests\integration\test_command.py | read_queue | 78] CHANGING_YAW: 45.00
+15:02:36: [INFO] [D:\Repositories\Uni Repo\WARG\autonomy-bootcamp-2025-p2\tests\integration\test_command.py | read_queue | 78] CHANGING_YAW: 63.43
+15:02:37: [INFO] [D:\Repositories\Uni Repo\WARG\autonomy-bootcamp-2025-p2\tests\integration\test_command.py | read_queue | 78] CHANGING_YAW: 90.00
+15:02:37: [INFO] [D:\Repositories\Uni Repo\WARG\autonomy-bootcamp-2025-p2\tests\integration\test_command.py | read_queue | 78] CHANGING_YAW: 26.57
+15:02:38: [INFO] [D:\Repositories\Uni Repo\WARG\autonomy-bootcamp-2025-p2\tests\integration\test_command.py | read_queue | 78] CHANGING_YAW: 45.00
+15:02:38: [INFO] [D:\Repositories\Uni Repo\WARG\autonomy-bootcamp-2025-p2\tests\integration\test_command.py | read_queue | 78] CHANGING_YAW: 90.00
+15:02:39: [INFO] [D:\Repositories\Uni Repo\WARG\autonomy-bootcamp-2025-p2\tests\integration\test_command.py | read_queue | 78] CHANGING_YAW: 45.00
+15:02:39: [INFO] [D:\Repositories\Uni Repo\WARG\autonomy-bootcamp-2025-p2\tests\integration\test_command.py | read_queue | 78] CHANGING_YAW: 90.00
+15:02:40: [INFO] [D:\Repositories\Uni Repo\WARG\autonomy-bootcamp-2025-p2\tests\integration\test_command.py | read_queue | 78] CHANGING_YAW: 135.00
+15:02:40: [INFO] [D:\Repositories\Uni Repo\WARG\autonomy-bootcamp-2025-p2\tests\integration\test_command.py | read_queue | 78] CHANGING_YAW: -26.57
+15:02:41: [INFO] [D:\Repositories\Uni Repo\WARG\autonomy-bootcamp-2025-p2\tests\integration\test_command.py | read_queue | 78] CHANGING_YAW: -45.00
+15:02:41: [INFO] [D:\Repositories\Uni Repo\WARG\autonomy-bootcamp-2025-p2\tests\integration\test_command.py | read_queue | 78] CHANGING_YAW: -90.00
+15:02:42: [INFO] [D:\Repositories\Uni Repo\WARG\autonomy-bootcamp-2025-p2\tests\integration\test_command.py | read_queue | 78] CHANGING_YAW: -45.00
+15:02:42: [INFO] [D:\Repositories\Uni Repo\WARG\autonomy-bootcamp-2025-p2\tests\integration\test_command.py | read_queue | 78] CHANGING_YAW: -90.00
+15:02:43: [INFO] [D:\Repositories\Uni Repo\WARG\autonomy-bootcamp-2025-p2\tests\integration\test_command.py | read_queue | 78] CHANGING_YAW: -135.00
+15:02:43: [INFO] [D:\Repositories\Uni Repo\WARG\autonomy-bootcamp-2025-p2\tests\integration\test_command.py | read_queue | 78] CHANGING_YAW: -63.43
+15:02:44: [INFO] [D:\Repositories\Uni Repo\WARG\autonomy-bootcamp-2025-p2\tests\integration\test_command.py | read_queue | 78] CHANGING_YAW: -90.00
+15:02:44: [INFO] [D:\Repositories\Uni Repo\WARG\autonomy-bootcamp-2025-p2\tests\integration\test_command.py | read_queue | 78] CHANGING_YAW: -116.57
+15:02:45: [INFO] [D:\Repositories\Uni Repo\WARG\autonomy-bootcamp-2025-p2\tests\integration\test_command.py | read_queue | 78] CHANGING_YAW: -45.00
+15:02:45: [INFO] [D:\Repositories\Uni Repo\WARG\autonomy-bootcamp-2025-p2\tests\integration\test_command.py | read_queue | 78] CHANGING_YAW: -63.43
+15:02:46: [INFO] [D:\Repositories\Uni Repo\WARG\autonomy-bootcamp-2025-p2\tests\integration\test_command.py | read_queue | 78] CHANGING_YAW: -90.00

@@ -1,0 +1,26 @@
+15:08:42: [INFO] [D:\Repositories\Uni Repo\WARG\autonomy-bootcamp-2025-p2\modules\telemetry\telemetry_worker.py | telemetry_worker | 47] Logger initialized
+15:08:42: [INFO] [D:\Repositories\Uni Repo\WARG\autonomy-bootcamp-2025-p2\modules\telemetry\telemetry_worker.py | telemetry_worker | 65] Telemetry data received and processed.
+15:08:42: [INFO] [D:\Repositories\Uni Repo\WARG\autonomy-bootcamp-2025-p2\modules\telemetry\telemetry_worker.py | telemetry_worker | 65] Telemetry data received and processed.
+15:08:43: [INFO] [D:\Repositories\Uni Repo\WARG\autonomy-bootcamp-2025-p2\modules\telemetry\telemetry_worker.py | telemetry_worker | 65] Telemetry data received and processed.
+15:08:43: [INFO] [D:\Repositories\Uni Repo\WARG\autonomy-bootcamp-2025-p2\modules\telemetry\telemetry_worker.py | telemetry_worker | 65] Telemetry data received and processed.
+15:08:44: [INFO] [D:\Repositories\Uni Repo\WARG\autonomy-bootcamp-2025-p2\modules\telemetry\telemetry_worker.py | telemetry_worker | 65] Telemetry data received and processed.
+15:08:44: [INFO] [D:\Repositories\Uni Repo\WARG\autonomy-bootcamp-2025-p2\modules\telemetry\telemetry_worker.py | telemetry_worker | 65] Telemetry data received and processed.
+15:08:45: [INFO] [D:\Repositories\Uni Repo\WARG\autonomy-bootcamp-2025-p2\modules\telemetry\telemetry_worker.py | telemetry_worker | 65] Telemetry data received and processed.
+15:08:45: [INFO] [D:\Repositories\Uni Repo\WARG\autonomy-bootcamp-2025-p2\modules\telemetry\telemetry_worker.py | telemetry_worker | 65] Telemetry data received and processed.
+15:08:46: [INFO] [D:\Repositories\Uni Repo\WARG\autonomy-bootcamp-2025-p2\modules\telemetry\telemetry_worker.py | telemetry_worker | 65] Telemetry data received and processed.
+15:08:46: [INFO] [D:\Repositories\Uni Repo\WARG\autonomy-bootcamp-2025-p2\modules\telemetry\telemetry_worker.py | telemetry_worker | 65] Telemetry data received and processed.
+15:08:47: [WARNING] [D:\Repositories\Uni Repo\WARG\autonomy-bootcamp-2025-p2\modules\telemetry\telemetry_worker.py | telemetry_worker | 68] Failed to receive telemetry data - timeout or missing messages
+15:08:48: [WARNING] [D:\Repositories\Uni Repo\WARG\autonomy-bootcamp-2025-p2\modules\telemetry\telemetry_worker.py | telemetry_worker | 68] Failed to receive telemetry data - timeout or missing messages
+15:08:49: [INFO] [D:\Repositories\Uni Repo\WARG\autonomy-bootcamp-2025-p2\modules\telemetry\telemetry_worker.py | telemetry_worker | 65] Telemetry data received and processed.
+15:08:50: [INFO] [D:\Repositories\Uni Repo\WARG\autonomy-bootcamp-2025-p2\modules\telemetry\telemetry_worker.py | telemetry_worker | 65] Telemetry data received and processed.
+15:08:50: [INFO] [D:\Repositories\Uni Repo\WARG\autonomy-bootcamp-2025-p2\modules\telemetry\telemetry_worker.py | telemetry_worker | 65] Telemetry data received and processed.
+15:08:51: [INFO] [D:\Repositories\Uni Repo\WARG\autonomy-bootcamp-2025-p2\modules\telemetry\telemetry_worker.py | telemetry_worker | 65] Telemetry data received and processed.
+15:08:51: [INFO] [D:\Repositories\Uni Repo\WARG\autonomy-bootcamp-2025-p2\modules\telemetry\telemetry_worker.py | telemetry_worker | 65] Telemetry data received and processed.
+15:08:52: [INFO] [D:\Repositories\Uni Repo\WARG\autonomy-bootcamp-2025-p2\modules\telemetry\telemetry_worker.py | telemetry_worker | 65] Telemetry data received and processed.
+15:08:52: [INFO] [D:\Repositories\Uni Repo\WARG\autonomy-bootcamp-2025-p2\modules\telemetry\telemetry_worker.py | telemetry_worker | 65] Telemetry data received and processed.
+15:08:53: [INFO] [D:\Repositories\Uni Repo\WARG\autonomy-bootcamp-2025-p2\modules\telemetry\telemetry_worker.py | telemetry_worker | 65] Telemetry data received and processed.
+15:08:53: [INFO] [D:\Repositories\Uni Repo\WARG\autonomy-bootcamp-2025-p2\modules\telemetry\telemetry_worker.py | telemetry_worker | 65] Telemetry data received and processed.
+15:08:54: [INFO] [D:\Repositories\Uni Repo\WARG\autonomy-bootcamp-2025-p2\modules\telemetry\telemetry_worker.py | telemetry_worker | 65] Telemetry data received and processed.
+15:08:54: [INFO] [D:\Repositories\Uni Repo\WARG\autonomy-bootcamp-2025-p2\modules\telemetry\telemetry_worker.py | telemetry_worker | 65] Telemetry data received and processed.
+15:08:55: [WARNING] [D:\Repositories\Uni Repo\WARG\autonomy-bootcamp-2025-p2\modules\telemetry\telemetry_worker.py | telemetry_worker | 68] Failed to receive telemetry data - timeout or missing messages
+15:08:55: [INFO] [D:\Repositories\Uni Repo\WARG\autonomy-bootcamp-2025-p2\modules\telemetry\telemetry_worker.py | telemetry_worker | 76] Worker has been terminated.

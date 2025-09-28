@@ -5,7 +5,6 @@ Test the telemetry worker with a mocked drone.
 import multiprocessing as mp
 import subprocess
 import threading
-import time
 
 from pymavlink import mavutil
 
@@ -48,7 +47,8 @@ def start_drone() -> None:
 #     v BOOTCAMPERS MODIFY BELOW THIS COMMENT v
 # =================================================================================================
 def stop(
-    controller: worker_controller.WorkerController, queue: queue_proxy_wrapper.QueueProxyWrapper
+    controller: worker_controller.WorkerController,
+    queue: queue_proxy_wrapper.QueueProxyWrapper,
 ) -> None:
     """
     Stop the workers.
@@ -125,7 +125,7 @@ def main() -> int:
     output_queue = queue_proxy_wrapper.QueueProxyWrapper(manager)
     # Just set a timer to stop the worker after a while, since the worker infinite loops
     threading.Timer(
-        TELEMETRY_PERIOD * NUM_TRIALS * 2 + NUM_FAILS, stop, (controller, data_queue)
+        TELEMETRY_PERIOD * NUM_TRIALS * 2 + NUM_FAILS, stop, (controller, output_queue)
     ).start()
 
     # Read the main queue (worker outputs)
