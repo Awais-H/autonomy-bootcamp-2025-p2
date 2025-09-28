@@ -16,8 +16,6 @@ class HeartbeatReceiver:
     HeartbeatReceiver class to send a heartbeat
     """
 
-    max_threshold = 5
-
     __private_key = object()
 
     @classmethod
@@ -47,6 +45,7 @@ class HeartbeatReceiver:
         self._last_heartbeat_time = time.time()
         self._missing_count = 0
         self._status = "Disconnected"
+        self.max_threshold = 5
 
     def run(self) -> str:
         """

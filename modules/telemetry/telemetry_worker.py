@@ -64,6 +64,10 @@ def telemetry_worker(
             if telemetry_data:
                 local_logger.info("Telemetry data received and processed.")
                 output_queue.queue.put(telemetry_data)
+            else:
+                local_logger.warning(
+                    "Failed to receive telemetry data - timeout or missing messages"
+                )
         except (OSError, mavutil.mavlink.MAVError) as e:
             local_logger.error(f"Error in telemetry worker loop: {e}")
 

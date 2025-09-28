@@ -50,29 +50,27 @@ def start_drone() -> None:
 #     v BOOTCAMPERS MODIFY BELOW THIS COMMENT v
 # =================================================================================================
 def stop(
-    args: tuple[worker_controller.WorkerController],
+    worker_controller_instance: worker_controller.WorkerController,
+    output_queue: queue_proxy_wrapper.QueueProxyWrapper,
 ) -> None:
     """
     Stop the workers.
     """
-    if args:
-        # Corrected: Use request_exit() instead of put()
-        args[0].request_exit()
+    worker_controller_instance.request_exit()
+    output_queue.fill_and_drain_queue()
 
 
 def read_queue(
-    args: tuple[queue_proxy_wrapper.QueueProxyWrapper],
+    output_queue: queue_proxy_wrapper.QueueProxyWrapper,
     main_logger: logger.Logger,
+    controller: worker_controller.WorkerController,
 ) -> None:
     """
     Read and print the output queue.
     """
-    while True:
+    while not controller.is_exit_requested():
         try:
-            # Corrected: Use args[0].queue.get() instead of args[0].get()
-            item = args[0].queue.get(timeout=1)
-            if item == "stop":
-                break
+            item = output_queue.queue.get(timeout=1)
             main_logger.info(f"Heartbeat receiver output: {item}")
         except mp.queues.Empty:
             pass
@@ -135,11 +133,14 @@ def main() -> int:
     threading.Timer(
         TEST_DURATION,
         stop,
-        ([heartbeat_receiver_worker_controller],),
+        (heartbeat_receiver_worker_controller, heartbeat_output_queue),
     ).start()
 
     # Read the main queue (worker outputs)
-    threading.Thread(target=read_queue, args=([heartbeat_output_queue], main_logger)).start()
+    threading.Thread(
+        target=read_queue,
+        args=(heartbeat_output_queue, main_logger, heartbeat_receiver_worker_controller),
+    ).start()
 
     heartbeat_receiver_worker.heartbeat_receiver_worker(
         # Place your own arguments here

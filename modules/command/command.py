@@ -31,10 +31,6 @@ class Command:  # pylint: disable=too-many-instance-attributes
     and send out commands based upon the data.
     """
 
-    # Thresholds for altitude and yaw adjustments
-    ALTITUDE_THRESHOLD = 0.5  # meters
-    YAW_THRESHOLD_DEG = 5.0  # degrees
-
     __private_key = object()
 
     @classmethod
@@ -64,39 +60,31 @@ class Command:  # pylint: disable=too-many-instance-attributes
         self._connection = connection
         self._target = target
         self._local_logger = local_logger
-        self._previous_telemetry_data = None
-        self._start_position = None  # Add this to store the start position
-        self._start_time = time.time()
+        self._input_count = 0
+        self._x_velocity = 0
+        self._y_velocity = 0
+        self._z_velocity = 0
 
     def run(self, telemetry_data: telemetry.TelemetryData) -> str | None:
         """
         Make a decision based on received telemetry data.
         """
-        if self._start_position is None:
-            self._start_position = Position(telemetry_data.x, telemetry_data.y, telemetry_data.z)
+        self._input_count += 1
+        self._x_velocity += telemetry_data.x_velocity
+        self._y_velocity += telemetry_data.y_velocity
+        self._z_velocity += telemetry_data.z_velocity
+        avg_velo = (
+            self._x_velocity / self._input_count,
+            self._y_velocity / self._input_count,
+            self._z_velocity / self._input_count,
+        )
 
-        # Calculate average velocity
-        if self._previous_telemetry_data:
-            elapsed_time = time.time() - self._start_time
-            if elapsed_time > 0:
-                delta_x = telemetry_data.x - self._start_position.x
-                delta_y = telemetry_data.y - self._start_position.y
-                delta_z = telemetry_data.z - self._start_position.z
+        self._local_logger.info("Average velocity:", avg_velo)
 
-                # Calculate the magnitude of the displacement vector
-                total_displacement_magnitude = math.sqrt(delta_x**2 + delta_y**2 + delta_z**2)
-
-                # Calculate average velocity magnitude
-                average_velocity_magnitude = total_displacement_magnitude / elapsed_time
-                self._local_logger.info(
-                    f"Average velocity so far: {average_velocity_magnitude:.2f} m/s"
-                )
-
-        self._previous_telemetry_data = telemetry_data
-
-        # Adjust altitude if off by more than 0.5m
-        delta_altitude = self._target.z - telemetry_data.z
-        if abs(delta_altitude) > self.ALTITUDE_THRESHOLD:
+        position_error_x = self._target.x - telemetry_data.x
+        position_error_y = self._target.y - telemetry_data.y
+        position_error_z = self._target.z - telemetry_data.z
+        if abs(position_error_z) > 0.5:
             try:
                 self._connection.mav.command_long_send(
                     target_system=1,
@@ -111,22 +99,23 @@ class Command:  # pylint: disable=too-many-instance-attributes
                     param6=0,
                     param7=self._target.z,
                 )
-                return f"CHANGE ALTITUDE: {delta_altitude:.2f}"
+                return f"CHANGE_ALTITUDE: {position_error_z:.2f}"
             except (OSError, mavutil.mavlink.MAVError) as e:
                 self._local_logger.error(f"Failed to send MAV_CMD_CONDITION_CHANGE_ALT: {e}")
 
-        # Adjust yaw if off by more than 5 degrees
-        target_yaw_rad = math.atan2(
-            self._target.y - telemetry_data.y, self._target.x - telemetry_data.x
-        )
+        target_yaw_rad = math.atan2(position_error_y, position_error_x)
         current_yaw_rad = telemetry_data.yaw
 
         delta_yaw_rad = target_yaw_rad - current_yaw_rad
-        # Normalize the angle to the range [-pi, pi]
-        delta_yaw_rad = math.atan2(math.sin(delta_yaw_rad), math.cos(delta_yaw_rad))
+        delta_yaw_rad = (delta_yaw_rad + math.pi) % (2 * math.pi) - math.pi
         delta_yaw_deg = math.degrees(delta_yaw_rad)
 
-        if abs(delta_yaw_deg) > self.YAW_THRESHOLD_DEG:
+        if abs(delta_yaw_deg) > 5:
+            if delta_yaw_deg > 0:
+                direction = -1
+            else:
+                direction = 1
+
             try:
                 self._connection.mav.command_long_send(
                     target_system=1,
@@ -135,17 +124,16 @@ class Command:  # pylint: disable=too-many-instance-attributes
                     confirmation=0,
                     param1=delta_yaw_deg,
                     param2=5,
-                    param3=1,
+                    param3=direction,
                     param4=1,
                     param5=0,
                     param6=0,
                     param7=0,
                 )
-                return f"CHANGE YAW: {delta_yaw_deg:.2f}"
+                return f"CHANGING_YAW: {delta_yaw_deg:.2f}"
             except (OSError, mavutil.mavlink.MAVError) as e:
                 self._local_logger.error(f"Failed to send MAV_CMD_CONDITION_YAW: {e}")
 
-        # If no commands were sent, return None
         return None
 
 

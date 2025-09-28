@@ -24,12 +24,12 @@ HEARTBEAT_PERIOD = 1
 NUM_TRIALS = 10
 
 # =================================================================================================
-#     v BOOTCAMPERS MODIFY BELOW THIS COMMENT v
+#                            ↓ BOOTCAMPERS MODIFY BELOW THIS COMMENT ↓
 # =================================================================================================
 # Add your own constants here
-TEST_DURATION = NUM_TRIALS
+
 # =================================================================================================
-#     ^ BOOTCAMPERS MODIFY ABOVE THIS COMMENT ^
+#                            ↑ BOOTCAMPERS MODIFY ABOVE THIS COMMENT ↑
 # =================================================================================================
 
 
@@ -43,20 +43,19 @@ def start_drone() -> None:
 
 
 # =================================================================================================
-#     v BOOTCAMPERS MODIFY BELOW THIS COMMENT v
+#                            ↓ BOOTCAMPERS MODIFY BELOW THIS COMMENT ↓
 # =================================================================================================
 def stop(
-    args: tuple[worker_controller.WorkerController],
+    heartbeat_sender_worker_controller: worker_controller.WorkerController,
 ) -> None:
     """
     Stop the workers.
     """
-    if args:
-        args[0].request_exit()
+    heartbeat_sender_worker_controller.request_exit()
 
 
 # =================================================================================================
-#     ^ BOOTCAMPERS MODIFY ABOVE THIS COMMENT ^
+#                            ↑ BOOTCAMPERS MODIFY ABOVE THIS COMMENT ↑
 # =================================================================================================
 
 
@@ -84,39 +83,41 @@ def main() -> int:
     # source_system = 255 (groundside)
     # source_component = 0 (ground control station)
     connection = mavutil.mavlink_connection(CONNECTION_STRING)
-
+    # Don't send another heartbeat since the worker will do so
     main_logger.info("Connected!")
     # pylint: enable=duplicate-code
 
     # =============================================================================================
-    #     v BOOTCAMPERS MODIFY BELOW THIS COMMENT v
+    #                          ↓ BOOTCAMPERS MODIFY BELOW THIS COMMENT ↓
     # =============================================================================================
+    # Mock starting a worker, since cannot actually start a new process
     # Create a worker controller for your worker
     heartbeat_sender_worker_controller = worker_controller.WorkerController()
 
-    threading.Timer(TEST_DURATION, stop, ([heartbeat_sender_worker_controller],)).start()
+    # Just set a timer to stop the worker after a while, since the worker infinite loops
+    threading.Timer(
+        HEARTBEAT_PERIOD * NUM_TRIALS, stop, (heartbeat_sender_worker_controller,)
+    ).start()
 
     heartbeat_sender_worker.heartbeat_sender_worker(
-        controller=heartbeat_sender_worker_controller,
-        connection=connection,
+        connection=connection, controller=heartbeat_sender_worker_controller
     )
     # =============================================================================================
-    #     ^ BOOTCAMPERS MODIFY ABOVE THIS COMMENT ^
+    #                          ↑ BOOTCAMPERS MODIFY ABOVE THIS COMMENT ↑
     # =============================================================================================
 
     return 0
 
 
 if __name__ == "__main__":
+    # Start drone in another process
     drone_process = mp.Process(target=start_drone)
     drone_process.start()
 
-    time.sleep(1)
+    result_main = main()
+    if result_main < 0:
+        print(f"Failed with return code {result_main}")
+    else:
+        print("Success!")
 
-    worker_process = mp.Process(target=main)
-    worker_process.start()
-
-    worker_process.join()
     drone_process.join()
-
-    print("Test finished.")

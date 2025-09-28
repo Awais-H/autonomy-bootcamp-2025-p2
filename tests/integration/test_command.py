@@ -7,8 +7,6 @@ import multiprocessing as mp
 import subprocess
 import threading
 import time
-import os
-import pathlib
 
 from pymavlink import mavutil
 
@@ -34,12 +32,12 @@ ANGLE_TOLERANCE = 5  # deg
 TURNING_SPEED = 5  # deg/s
 
 # =================================================================================================
-#                         ↓ BOOTCAMPERS MODIFY BELOW THIS COMMENT ↓
+#                            ↓ BOOTCAMPERS MODIFY BELOW THIS COMMENT ↓
 # =================================================================================================
 # Add your own constants here
-TEST_DURATION = 30
+
 # =================================================================================================
-#                         ↑ BOOTCAMPERS MODIFY ABOVE THIS COMMENT ↑
+#                            ↑ BOOTCAMPERS MODIFY ABOVE THIS COMMENT ↑
 # =================================================================================================
 
 
@@ -49,16 +47,6 @@ def start_drone() -> None:
     """
     Start the mocked drone.
     """
-    drone_name = pathlib.Path(MOCK_DRONE_MODULE).stem
-    process_id = os.getpid()
-    result, drone_logger = logger.Logger.create(f"{drone_name}_{process_id}", True)
-    if not result:
-        print("ERROR: Drone failed to create logger")
-        return
-
-    assert drone_logger is not None
-    drone_logger.info("Drone logger initialized.")
-
     subprocess.run(["python", "-m", MOCK_DRONE_MODULE], shell=True, check=False)
 
 
@@ -66,43 +54,38 @@ def start_drone() -> None:
 #                         ↓ BOOTCAMPERS MODIFY BELOW THIS COMMENT ↓
 # =================================================================================================
 def stop(
-    args: tuple[worker_controller.WorkerController],
+    data_queue: queue_proxy_wrapper.QueueProxyWrapper,
+    output_queue: queue_proxy_wrapper.QueueProxyWrapper,
+    worker_controller_instance: worker_controller.WorkerController,
 ) -> None:
     """
     Stop the workers.
     """
-    if args:
-        args[0].request_exit()
+    worker_controller_instance.request_exit()
+    data_queue.fill_and_drain_queue()
+    output_queue.fill_and_drain_queue()
 
 
 def read_queue(
-    args: tuple[queue_proxy_wrapper.QueueProxyWrapper],
+    output_queue: queue_proxy_wrapper.QueueProxyWrapper,
     main_logger: logger.Logger,
 ) -> None:
     """
     Read and print the output queue.
     """
     while True:
-        try:
-            item = args[0].queue.get(timeout=1)
-            if item == "stop":
-                break
-            main_logger.info(f"Command worker output: {item}")
-        except mp.queues.Empty:
-            pass
+        msg = output_queue.queue.get()
+        main_logger.info(msg)
 
 
 def put_queue(
-    args: tuple[list, queue_proxy_wrapper.QueueProxyWrapper],
+    data_queue: queue_proxy_wrapper.QueueProxyWrapper, drone_data: list[telemetry.TelemetryData]
 ) -> None:
     """
     Place mocked inputs into the input queue periodically with period TELEMETRY_PERIOD.
     """
-    path = args[0]
-    telemetry_input_queue = args[1]
-
-    for point in path:
-        telemetry_input_queue.queue.put(point)
+    for data in drone_data:
+        data_queue.queue.put(data)
         time.sleep(TELEMETRY_PERIOD)
 
 
@@ -148,17 +131,18 @@ def main() -> int:
     # pylint: enable=duplicate-code
 
     # =============================================================================================
-    #                         ↓ BOOTCAMPERS MODIFY BELOW THIS COMMENT ↓
-    # =================================================================================================
+    #                          ↓ BOOTCAMPERS MODIFY BELOW THIS COMMENT ↓
+    # =============================================================================================
+    # Mock starting a worker, since cannot actually start a new process
     # Create a worker controller for your worker
-    command_worker_controller = worker_controller.WorkerController()
+    worker_controller_instance = worker_controller.WorkerController()
 
     # Create a multiprocess manager for synchronized queues
     manager = mp.Manager()
 
-    # Create your queues by passing the manager directly
-    telemetry_input_queue = queue_proxy_wrapper.QueueProxyWrapper(manager)
-    command_output_queue = queue_proxy_wrapper.QueueProxyWrapper(manager)
+    # Create your queues
+    data_queue = queue_proxy_wrapper.QueueProxyWrapper(manager)
+    output_queue = queue_proxy_wrapper.QueueProxyWrapper(manager)
 
     # Test cases, DO NOT EDIT!
     path = [
@@ -311,29 +295,26 @@ def main() -> int:
     ]
 
     # Just set a timer to stop the worker after a while, since the worker infinite loops
-    threading.Timer(TEST_DURATION, stop, ([command_worker_controller],)).start()
-
-    # Put items into input queue
-    threading.Thread(
-        target=put_queue,
-        # Pass only the path and the telemetry input queue
-        args=([path, telemetry_input_queue],),
+    threading.Timer(
+        TELEMETRY_PERIOD * len(path), stop, (data_queue, output_queue, worker_controller_instance)
     ).start()
 
+    # Put items into input queue
+    threading.Thread(target=put_queue, args=(data_queue, path)).start()
+
     # Read the main queue (worker outputs)
-    threading.Thread(target=read_queue, args=([command_output_queue], main_logger)).start()
+    threading.Thread(target=read_queue, args=(output_queue, main_logger)).start()
 
     command_worker.command_worker(
-        # Pass the telemetry input queue to the command worker
-        controller=command_worker_controller,
         connection=connection,
         target=TARGET,
-        input_queue=telemetry_input_queue,
-        output_queue=command_output_queue,
+        data_queue=data_queue,
+        output_queue=output_queue,
+        controller=worker_controller_instance,
     )
     # =============================================================================================
-    #                         ↑ BOOTCAMPERS MODIFY ABOVE THIS COMMENT ↑
-    # =================================================================================================
+    #                          ↑ BOOTCAMPERS MODIFY ABOVE THIS COMMENT ↑
+    # =============================================================================================
 
     return 0
 

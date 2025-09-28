@@ -7,8 +7,6 @@ Main process to setup and manage all the other working processes
 import multiprocessing as mp
 import queue
 import time
-import shutil
-import pathlib
 
 from pymavlink import mavutil
 
@@ -30,50 +28,31 @@ CONNECTION_STRING = "tcp:localhost:12345"
 
 
 # =================================================================================================
-#                         ↓ BOOTCAMPERS MODIFY BELOW THIS COMMENT ↓
+#                            ↓ BOOTCAMPERS MODIFY BELOW THIS COMMENT ↓
 # =================================================================================================
 # Set queue max sizes (<= 0 for infinity)
-HEARTBEAT_SENDER_OUTPUT_QUEUE_MAX_SIZE = 10
-HEARTBEAT_RECEIVER_OUTPUT_QUEUE_MAX_SIZE = 10
-TELEMETRY_OUTPUT_QUEUE_MAX_SIZE = 10
-COMMAND_OUTPUT_QUEUE_MAX_SIZE = 10
+HEARTBEAT_RECEIVER_QUEUE_SIZE = 10
+TELEMETRY_QUEUE_SIZE = 10
+COMMAND_QUEUE_SIZE = 10
 
 # Set worker counts
-HEARTBEAT_RECEIVER_WORKER_COUNT = 1
-HEARTBEAT_SENDER_WORKER_COUNT = 1
-TELEMETRY_WORKER_COUNT = 1
-COMMAND_WORKER_COUNT = 1
+NUM_HEARTBEAT_SENDER = 1
+NUM_HEARTBEAT_RECEIVER = 1
+NUM_TELEMETRY = 1
+NUM_COMMAND = 1
 
 # Any other constants
 TARGET = command.Position(10, 10, 10)
-MAIN_PROCESS_RUN_TIME = 100
-# =================================================================================================
-#                         ↑ BOOTCAMPERS MODIFY ABOVE THIS COMMENT ↑
-# =================================================================================================
 
-
-def clean_logs() -> None:
-    """
-    Deletes all files and folders in the logs directory.
-    """
-    log_dir = pathlib.Path(__file__).parent.parent.parent / "logs"
-    if log_dir.exists() and log_dir.is_dir():
-        for item in log_dir.iterdir():
-            if item.is_dir():
-                shutil.rmtree(item)
-            else:
-                item.unlink()
-    else:
-        log_dir.mkdir(parents=True, exist_ok=True)
+# =================================================================================================
+#                            ↑ BOOTCAMPERS MODIFY ABOVE THIS COMMENT ↑
+# =================================================================================================
 
 
 def main() -> int:
     """
     Main function.
     """
-    # Clean up old logs for a fresh start
-    clean_logs()
-
     # Configuration settings
     result, config = read_yaml.open_config(logger.CONFIG_FILE_PATH)
     if not result:
@@ -110,136 +89,130 @@ def main() -> int:
     manager = mp.Manager()
 
     # Create queues
-    heartbeat_sender_output_queue = queue_proxy_wrapper.QueueProxyWrapper(
-        manager, HEARTBEAT_SENDER_OUTPUT_QUEUE_MAX_SIZE
-    )
-    heartbeat_receiver_output_queue = queue_proxy_wrapper.QueueProxyWrapper(
-        manager, HEARTBEAT_RECEIVER_OUTPUT_QUEUE_MAX_SIZE
-    )
-    telemetry_output_queue = queue_proxy_wrapper.QueueProxyWrapper(
-        manager, TELEMETRY_OUTPUT_QUEUE_MAX_SIZE
-    )
-    command_output_queue = queue_proxy_wrapper.QueueProxyWrapper(
-        manager, COMMAND_OUTPUT_QUEUE_MAX_SIZE
-    )
+    receiver_queue = queue_proxy_wrapper.QueueProxyWrapper(manager, TELEMETRY_QUEUE_MAXSIZE)
+    telemetry_queue = queue_proxy_wrapper.QueueProxyWrapper(manager, TELEMETRY_QUEUE_MAXSIZE)
+    command_queue = queue_proxy_wrapper.QueueProxyWrapper(manager, COMMAND_QUEUE_MAXSIZE)
+    heartbeat_queue = queue_proxy_wrapper.QueueProxyWrapper(manager, HEARTBEAT_QUEUE_MAXSIZE)
 
     # Create worker properties for each worker type (what inputs it takes, how many workers)
     # Heartbeat sender
-    result, heartbeat_sender_worker_properties = worker_manager.WorkerProperties.create(
+    result, hb_send_props = worker_manager.WorkerProperties.create(
+        count=NUM_HEARTBEAT_SENDERS,
         target=heartbeat_sender_worker.heartbeat_sender_worker,
-        count=HEARTBEAT_SENDER_WORKER_COUNT,
-        work_arguments=(connection,),
+        work_arguments=(connection, HEARTBEAT_PERIOD),
         input_queues=[],
-        output_queues=[heartbeat_sender_output_queue],
+        output_queues=[],
         controller=main_controller,
         local_logger=main_logger,
     )
     if not result:
+        main_logger.error("Sender worker failed")
         return -1
 
     # Heartbeat receiver
-    result, heartbeat_receiver_worker_properties = worker_manager.WorkerProperties.create(
+    result, heartbeat_receiver_worker_prop = worker_manager.WorkerProperties.create(
         target=heartbeat_receiver_worker.heartbeat_receiver_worker,
-        count=HEARTBEAT_RECEIVER_WORKER_COUNT,
+        count=NUM_HEARTBEAT_RECEIVER,
         work_arguments=(connection,),
         input_queues=[],
-        output_queues=[heartbeat_receiver_output_queue],
+        output_queues=[receiver_queue],
         controller=main_controller,
         local_logger=main_logger,
     )
     if not result:
+        main_logger.error("Receiver worker failed")
         return -1
 
     # Telemetry
-    result, telemetry_worker_properties = worker_manager.WorkerProperties.create(
+    result, telemetry_worker_prop = worker_manager.WorkerProperties.create(
         target=telemetry_worker.telemetry_worker,
-        count=TELEMETRY_WORKER_COUNT,
+        count=NUM_TELEMETRY,
         work_arguments=(connection,),
         input_queues=[],
-        output_queues=[telemetry_output_queue],
+        output_queues=[telemetry_queue],
         controller=main_controller,
         local_logger=main_logger,
     )
     if not result:
+        main_logger.error("Telemetry worker failed")
         return -1
 
     # Command
-    result, command_worker_properties = worker_manager.WorkerProperties.create(
+    result, command_worker_prop = worker_manager.WorkerProperties.create(
         target=command_worker.command_worker,
-        count=COMMAND_WORKER_COUNT,
+        count=NUM_COMMAND,
         work_arguments=(connection, TARGET),
-        input_queues=[telemetry_output_queue],
-        output_queues=[command_output_queue],
+        input_queues=[telemetry_queue],
+        output_queues=[command_queue],
         controller=main_controller,
         local_logger=main_logger,
     )
     if not result:
+        main_logger.error("Command worker failed")
         return -1
 
-    # Get pylance to stop complaining
-    assert heartbeat_sender_worker_properties is not None
-    assert heartbeat_receiver_worker_properties is not None
-    assert telemetry_worker_properties is not None
-    assert command_worker_properties is not None
+    assert heartbeat_sender_worker_prop is not None
+    assert heartbeat_receiver_worker_prop is not None
+    assert telemetry_worker_prop is not None
+    assert command_worker_prop is not None
 
     # Create the workers (processes) and obtain their managers
-    worker_properties_list = [
-        heartbeat_sender_worker_properties,
-        heartbeat_receiver_worker_properties,
-        telemetry_worker_properties,
-        command_worker_properties,
+    all_worker_properties_list = [
+        heartbeat_sender_worker_prop,
+        heartbeat_receiver_worker_prop,
+        telemetry_worker_prop,
+        command_worker_prop,
     ]
+
     result, main_worker_manager = worker_manager.WorkerManager.create(
-        worker_properties=worker_properties_list,
+        worker_properties=all_worker_properties_list,
         local_logger=main_logger,
     )
+
     if not result:
         return -1
-
-    # Get pylance to stop complaining
     assert main_worker_manager is not None
 
     # Start worker processes
     main_worker_manager.start_workers()
-
-    main_logger.info("Started")
+    main_logger.info("Started workers")
 
     # Main's work: read from all queues that output to main, and log any commands that we make
     # Continue running for 100 seconds or until the drone disconnects
     start_time = time.time()
-    all_queues = [
-        heartbeat_sender_output_queue,
-        heartbeat_receiver_output_queue,
-        telemetry_output_queue,
-        command_output_queue,
-    ]
-    while (time.time() - start_time) < MAIN_PROCESS_RUN_TIME and connection.target_system != 0:
-        for output_queue in all_queues:
+    queues = [receiver_queue, telemetry_queue, command_queue]
+
+    while time.time() - start_time < 100 and connection.target_system != 0:
+        for output in queues:
             while True:
                 try:
-                    message = output_queue.queue.get_nowait()
-                    main_logger.info(f"Main received: {message}")
+                    msg = output.queue.get_nowait()
+                    main_logger.info(f"Received message: {msg}")
+
+                    if msg == "Disconnected":
+                        break
+
                 except queue.Empty:
                     break
         time.sleep(1)
 
     # Stop the processes
-    main_worker_manager.request_exit_all()
+    main_controller.request_exit()
     main_logger.info("Requested exit")
 
     # Fill and drain queues from END TO START
-    for output_queue in all_queues:
-        while not output_queue.queue.empty():
-            output_queue.queue.get()
+    receiver_queue.fill_and_drain_queue()
+    telemetry_queue.fill_and_drain_queue()
+    command_queue.fill_and_drain_queue()
     main_logger.info("Queues cleared")
 
     # Clean up worker processes
-    main_worker_manager.join_all()
+    main_worker_manager.join_workers()
     main_logger.info("Stopped")
 
     # We can reset controller in case we want to reuse it
     # Alternatively, create a new WorkerController instance
-    main_controller.reset()
+    main_controller = worker_controller.WorkerController()
     # =============================================================================================
     #                         ↑ BOOTCAMPERS MODIFY ABOVE THIS COMMENT ↑
     # =============================================================================================
