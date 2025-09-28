@@ -32,14 +32,18 @@ CONNECTION_STRING = "tcp:localhost:12345"
 # =================================================================================================
 # Set queue max sizes (<= 0 for infinity)
 HEARTBEAT_RECEIVER_QUEUE_SIZE = 10
-TELEMETRY_QUEUE_SIZE = 10
-COMMAND_QUEUE_SIZE = 10
+TELEMETRY_QUEUE_MAXSIZE = 10
+COMMAND_QUEUE_MAXSIZE = 10
+HEARTBEAT_QUEUE_MAXSIZE = 10
 
 # Set worker counts
-NUM_HEARTBEAT_SENDER = 1
+NUM_HEARTBEAT_SENDERS = 1
 NUM_HEARTBEAT_RECEIVER = 1
 NUM_TELEMETRY = 1
 NUM_COMMAND = 1
+
+# Heartbeat period
+HEARTBEAT_PERIOD = 1.0
 
 # Any other constants
 TARGET = command.Position(10, 10, 10)
@@ -92,7 +96,6 @@ def main() -> int:
     receiver_queue = queue_proxy_wrapper.QueueProxyWrapper(manager, TELEMETRY_QUEUE_MAXSIZE)
     telemetry_queue = queue_proxy_wrapper.QueueProxyWrapper(manager, TELEMETRY_QUEUE_MAXSIZE)
     command_queue = queue_proxy_wrapper.QueueProxyWrapper(manager, COMMAND_QUEUE_MAXSIZE)
-    heartbeat_queue = queue_proxy_wrapper.QueueProxyWrapper(manager, HEARTBEAT_QUEUE_MAXSIZE)
 
     # Create worker properties for each worker type (what inputs it takes, how many workers)
     # Heartbeat sender
@@ -151,14 +154,14 @@ def main() -> int:
         main_logger.error("Command worker failed")
         return -1
 
-    assert heartbeat_sender_worker_prop is not None
+    assert hb_send_props is not None
     assert heartbeat_receiver_worker_prop is not None
     assert telemetry_worker_prop is not None
     assert command_worker_prop is not None
 
     # Create the workers (processes) and obtain their managers
     all_worker_properties_list = [
-        heartbeat_sender_worker_prop,
+        hb_send_props,
         heartbeat_receiver_worker_prop,
         telemetry_worker_prop,
         command_worker_prop,
