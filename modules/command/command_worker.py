@@ -22,13 +22,18 @@ def command_worker(
     input_queue: queue_proxy_wrapper.QueueProxyWrapper,
     output_queue: queue_proxy_wrapper.QueueProxyWrapper,
     controller: worker_controller.WorkerController,
-    altitude_threshold: float = 0.5,
-    yaw_threshold_deg: float = 5.0,
 ) -> None:
     """
     Worker process.
 
-    args... describe what the arguments are
+    Args:
+        connection: MAVLink connection to the drone for sending commands
+        target: Target position (x, y, z coordinates) for the drone to reach
+        input_queue: Queue containing telemetry data from the telemetry worker
+        output_queue: Queue to send generated commands to the main process
+        controller: Worker controller for managing worker lifecycle (pause/exit)
+        altitude_threshold: Maximum altitude error before sending altitude change command (meters)
+        yaw_threshold_deg: Maximum yaw error before sending yaw change command (degrees)
     """
     # =============================================================================================
     #     ^ BOOTCAMPERS MODIFY ABOVE THIS COMMENT ^
@@ -52,9 +57,7 @@ def command_worker(
     # =================================================================================================
 
     # Instantiate class object (command.Command)
-    result, command_instance = command.Command.create(
-        connection, target, local_logger, altitude_threshold, yaw_threshold_deg
-    )
+    result, command_instance = command.Command.create(connection, target, local_logger)
     if not result:
         local_logger.error("Failed to create Command instance.")
         return

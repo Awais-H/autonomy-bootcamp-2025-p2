@@ -38,8 +38,6 @@ class Command:  # pylint: disable=too-many-instance-attributes
         connection: mavutil.mavfile,
         target: Position,
         local_logger: logger.Logger,
-        altitude_threshold: float = 0.5,
-        yaw_threshold_deg: float = 5.0,
     ) -> "tuple[True, Command] | tuple[False, None]":
         """
         Falliable create (instantiation) method to create a Command object.
@@ -50,8 +48,6 @@ class Command:  # pylint: disable=too-many-instance-attributes
                 connection,
                 target,
                 local_logger,
-                altitude_threshold,
-                yaw_threshold_deg,
             )
         except (OSError, mavutil.mavlink.MAVError) as e:
             local_logger.error(f"Failed to create Command object: {e}")

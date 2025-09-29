@@ -148,6 +148,9 @@ class Telemetry:  # pylint: disable=too-many-instance-attributes
 
                 return telemetry_data
 
+        # Reset when timeout occurs to restart collection
+        self._last_position = None
+        self._last_attitude = None
         return None
 
 
