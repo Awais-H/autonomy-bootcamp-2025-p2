@@ -5,6 +5,7 @@ Test the telemetry worker with a mocked drone.
 import multiprocessing as mp
 import subprocess
 import threading
+import queue as queue_module
 
 from pymavlink import mavutil
 
@@ -68,6 +69,9 @@ def read_queue(
         try:
             output_data = queue.queue.get(timeout=2)
             main_logger.info(output_data)
+        except queue_module.Empty:
+            # No data available yet; continue polling
+            continue
         except (OSError, ValueError, EOFError):
             break
 
@@ -125,7 +129,7 @@ def main() -> int:
     output_queue = queue_proxy_wrapper.QueueProxyWrapper(manager)
     # Just set a timer to stop the worker after a while, since the worker infinite loops
     threading.Timer(
-        TELEMETRY_PERIOD * NUM_TRIALS * 2 + NUM_FAILS, stop, (controller, output_queue)
+        TELEMETRY_PERIOD * NUM_TRIALS * 2 + NUM_FAILS, stop, (output_queue, controller)
     ).start()
 
     # Read the main queue (worker outputs)

@@ -112,9 +112,7 @@ class Telemetry:  # pylint: disable=too-many-instance-attributes
 
         # Set to smaller than 1.0, as 1.0s is the timeout
         while time.time() - start_time < 1.0:
-            msg = self._connection.recv_match(
-                type=["ATTITUDE", "LOCAL_POSITION_NED"], blocking=False, timeout=0.0
-            )
+            msg = self._connection.recv_match(blocking=False)
             if msg:
                 if msg.get_type() == "ATTITUDE":
                     self._last_attitude = msg
