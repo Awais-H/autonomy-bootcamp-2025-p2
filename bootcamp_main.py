@@ -187,16 +187,15 @@ def main() -> int:
 
     while time.time() - start_time < 100 and connection.target_system != 0:
         for output in queues:
-            while True:
-                try:
-                    msg = output.queue.get_nowait()
-                    main_logger.info(f"Received message: {msg}")
+            try:
+                msg = output.queue.get_nowait()
+                main_logger.info(f"Received message: {msg}")
 
-                    if msg == "Disconnected":
-                        break
-
-                except queue.Empty:
+                if msg == "Disconnected":
                     break
+
+            except queue.Empty:
+                continue
         time.sleep(1)
 
     # Stop the processes

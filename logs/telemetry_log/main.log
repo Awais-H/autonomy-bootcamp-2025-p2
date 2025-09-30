@@ -1,6 +1,6 @@
-02:12:18: [INFO] [D:\Repositories\Uni Repo\WARG\autonomy-bootcamp-2025-p2\modules\common\modules\logger\logger_main_setup.py | setup_main_logger | 62] main logger initialized
-02:12:19: [INFO] [D:\Repositories\Uni Repo\WARG\autonomy-bootcamp-2025-p2\tests\integration\test_telemetry.py | main | 117] Connected!
-02:12:19: [INFO] [D:\Repositories\Uni Repo\WARG\autonomy-bootcamp-2025-p2\tests\integration\test_telemetry.py | read_queue | 71] {
+21:03:19: [INFO] [D:\Repositories\Uni Repo\WARG\autonomy-bootcamp-2025-p2\modules\common\modules\logger\logger_main_setup.py | setup_main_logger | 62] main logger initialized
+21:03:21: [INFO] [D:\Repositories\Uni Repo\WARG\autonomy-bootcamp-2025-p2\tests\integration\test_telemetry.py | main | 117] Connected!
+21:03:21: [INFO] [D:\Repositories\Uni Repo\WARG\autonomy-bootcamp-2025-p2\tests\integration\test_telemetry.py | read_queue | 71] {
             time_since_boot: 0,
             x: 0.0,
             y: 0.0,
@@ -15,7 +15,7 @@
             pitch_speed: 0.0,
             yaw_speed: 3.1415927410125732
         }
-02:12:19: [INFO] [D:\Repositories\Uni Repo\WARG\autonomy-bootcamp-2025-p2\tests\integration\test_telemetry.py | read_queue | 71] {
+21:03:21: [INFO] [D:\Repositories\Uni Repo\WARG\autonomy-bootcamp-2025-p2\tests\integration\test_telemetry.py | read_queue | 71] {
             time_since_boot: 500,
             x: 0.5,
             y: 0.0,
@@ -30,7 +30,7 @@
             pitch_speed: 0.0,
             yaw_speed: 3.1415927410125732
         }
-02:12:20: [INFO] [D:\Repositories\Uni Repo\WARG\autonomy-bootcamp-2025-p2\tests\integration\test_telemetry.py | read_queue | 71] {
+21:03:22: [INFO] [D:\Repositories\Uni Repo\WARG\autonomy-bootcamp-2025-p2\tests\integration\test_telemetry.py | read_queue | 71] {
             time_since_boot: 1000,
             x: 1.0,
             y: 0.0,
@@ -45,7 +45,7 @@
             pitch_speed: 0.0,
             yaw_speed: 3.1415927410125732
         }
-02:12:20: [INFO] [D:\Repositories\Uni Repo\WARG\autonomy-bootcamp-2025-p2\tests\integration\test_telemetry.py | read_queue | 71] {
+21:03:22: [INFO] [D:\Repositories\Uni Repo\WARG\autonomy-bootcamp-2025-p2\tests\integration\test_telemetry.py | read_queue | 71] {
             time_since_boot: 1500,
             x: 1.5,
             y: 0.0,
@@ -60,7 +60,7 @@
             pitch_speed: 0.0,
             yaw_speed: 3.1415927410125732
         }
-02:12:21: [INFO] [D:\Repositories\Uni Repo\WARG\autonomy-bootcamp-2025-p2\tests\integration\test_telemetry.py | read_queue | 71] {
+21:03:23: [INFO] [D:\Repositories\Uni Repo\WARG\autonomy-bootcamp-2025-p2\tests\integration\test_telemetry.py | read_queue | 71] {
             time_since_boot: 2000,
             x: 2.0,
             y: 0.0,
@@ -75,7 +75,7 @@
             pitch_speed: 0.0,
             yaw_speed: 3.1415927410125732
         }
-02:12:21: [INFO] [D:\Repositories\Uni Repo\WARG\autonomy-bootcamp-2025-p2\tests\integration\test_telemetry.py | read_queue | 71] {
+21:03:23: [INFO] [D:\Repositories\Uni Repo\WARG\autonomy-bootcamp-2025-p2\tests\integration\test_telemetry.py | read_queue | 71] {
             time_since_boot: 2500,
             x: 2.5,
             y: 0.0,
@@ -90,7 +90,7 @@
             pitch_speed: 0.0,
             yaw_speed: 3.1415927410125732
         }
-02:12:22: [INFO] [D:\Repositories\Uni Repo\WARG\autonomy-bootcamp-2025-p2\tests\integration\test_telemetry.py | read_queue | 71] {
+21:03:24: [INFO] [D:\Repositories\Uni Repo\WARG\autonomy-bootcamp-2025-p2\tests\integration\test_telemetry.py | read_queue | 71] {
             time_since_boot: 3000,
             x: 3.0,
             y: 0.0,
@@ -105,7 +105,7 @@
             pitch_speed: 0.0,
             yaw_speed: 3.1415927410125732
         }
-02:12:22: [INFO] [D:\Repositories\Uni Repo\WARG\autonomy-bootcamp-2025-p2\tests\integration\test_telemetry.py | read_queue | 71] {
+21:03:24: [INFO] [D:\Repositories\Uni Repo\WARG\autonomy-bootcamp-2025-p2\tests\integration\test_telemetry.py | read_queue | 71] {
             time_since_boot: 3500,
             x: 3.5,
             y: 0.0,
@@ -120,7 +120,7 @@
             pitch_speed: 0.0,
             yaw_speed: 3.1415927410125732
         }
-02:12:23: [INFO] [D:\Repositories\Uni Repo\WARG\autonomy-bootcamp-2025-p2\tests\integration\test_telemetry.py | read_queue | 71] {
+21:03:25: [INFO] [D:\Repositories\Uni Repo\WARG\autonomy-bootcamp-2025-p2\tests\integration\test_telemetry.py | read_queue | 71] {
             time_since_boot: 4000,
             x: 4.0,
             y: 0.0,
@@ -135,7 +135,7 @@
             pitch_speed: 0.0,
             yaw_speed: 3.1415927410125732
         }
-02:12:23: [INFO] [D:\Repositories\Uni Repo\WARG\autonomy-bootcamp-2025-p2\tests\integration\test_telemetry.py | read_queue | 71] {
+21:03:25: [INFO] [D:\Repositories\Uni Repo\WARG\autonomy-bootcamp-2025-p2\tests\integration\test_telemetry.py | read_queue | 71] {
             time_since_boot: 4500,
             x: 4.5,
             y: 0.0,
@@ -150,7 +150,7 @@
             pitch_speed: 0.0,
             yaw_speed: 3.1415927410125732
         }
-02:12:27: [INFO] [D:\Repositories\Uni Repo\WARG\autonomy-bootcamp-2025-p2\tests\integration\test_telemetry.py | read_queue | 71] {
+21:03:29: [INFO] [D:\Repositories\Uni Repo\WARG\autonomy-bootcamp-2025-p2\tests\integration\test_telemetry.py | read_queue | 71] {
             time_since_boot: 0,
             x: 0.0,
             y: 0.0,
@@ -165,7 +165,7 @@
             pitch_speed: 0.0,
             yaw_speed: 3.1415927410125732
         }
-02:12:27: [INFO] [D:\Repositories\Uni Repo\WARG\autonomy-bootcamp-2025-p2\tests\integration\test_telemetry.py | read_queue | 71] {
+21:03:29: [INFO] [D:\Repositories\Uni Repo\WARG\autonomy-bootcamp-2025-p2\tests\integration\test_telemetry.py | read_queue | 71] {
             time_since_boot: 500,
             x: 0.3333333432674408,
             y: 0.0,
@@ -180,7 +180,7 @@
             pitch_speed: 0.0,
             yaw_speed: 3.1415927410125732
         }
-02:12:28: [INFO] [D:\Repositories\Uni Repo\WARG\autonomy-bootcamp-2025-p2\tests\integration\test_telemetry.py | read_queue | 71] {
+21:03:30: [INFO] [D:\Repositories\Uni Repo\WARG\autonomy-bootcamp-2025-p2\tests\integration\test_telemetry.py | read_queue | 71] {
             time_since_boot: 1000,
             x: 0.6666666865348816,
             y: 0.0,
@@ -195,7 +195,7 @@
             pitch_speed: 0.0,
             yaw_speed: 3.1415927410125732
         }
-02:12:28: [INFO] [D:\Repositories\Uni Repo\WARG\autonomy-bootcamp-2025-p2\tests\integration\test_telemetry.py | read_queue | 71] {
+21:03:30: [INFO] [D:\Repositories\Uni Repo\WARG\autonomy-bootcamp-2025-p2\tests\integration\test_telemetry.py | read_queue | 71] {
             time_since_boot: 1500,
             x: 1.3333333730697632,
             y: 0.0,
@@ -210,7 +210,7 @@
             pitch_speed: 0.0,
             yaw_speed: 3.1415927410125732
         }
-02:12:29: [INFO] [D:\Repositories\Uni Repo\WARG\autonomy-bootcamp-2025-p2\tests\integration\test_telemetry.py | read_queue | 71] {
+21:03:31: [INFO] [D:\Repositories\Uni Repo\WARG\autonomy-bootcamp-2025-p2\tests\integration\test_telemetry.py | read_queue | 71] {
             time_since_boot: 2000,
             x: 1.6666666269302368,
             y: 0.0,
@@ -225,7 +225,7 @@
             pitch_speed: 0.0,
             yaw_speed: 3.1415927410125732
         }
-02:12:29: [INFO] [D:\Repositories\Uni Repo\WARG\autonomy-bootcamp-2025-p2\tests\integration\test_telemetry.py | read_queue | 71] {
+21:03:31: [INFO] [D:\Repositories\Uni Repo\WARG\autonomy-bootcamp-2025-p2\tests\integration\test_telemetry.py | read_queue | 71] {
             time_since_boot: 2500,
             x: 2.3333332538604736,
             y: 0.0,
@@ -240,7 +240,7 @@
             pitch_speed: 0.0,
             yaw_speed: 3.1415927410125732
         }
-02:12:30: [INFO] [D:\Repositories\Uni Repo\WARG\autonomy-bootcamp-2025-p2\tests\integration\test_telemetry.py | read_queue | 71] {
+21:03:32: [INFO] [D:\Repositories\Uni Repo\WARG\autonomy-bootcamp-2025-p2\tests\integration\test_telemetry.py | read_queue | 71] {
             time_since_boot: 3000,
             x: 2.6666667461395264,
             y: 0.0,
@@ -255,7 +255,7 @@
             pitch_speed: 0.0,
             yaw_speed: 3.1415927410125732
         }
-02:12:30: [INFO] [D:\Repositories\Uni Repo\WARG\autonomy-bootcamp-2025-p2\tests\integration\test_telemetry.py | read_queue | 71] {
+21:03:32: [INFO] [D:\Repositories\Uni Repo\WARG\autonomy-bootcamp-2025-p2\tests\integration\test_telemetry.py | read_queue | 71] {
             time_since_boot: 3500,
             x: 3.3333332538604736,
             y: 0.0,
@@ -270,7 +270,7 @@
             pitch_speed: 0.0,
             yaw_speed: 3.1415927410125732
         }
-02:12:31: [INFO] [D:\Repositories\Uni Repo\WARG\autonomy-bootcamp-2025-p2\tests\integration\test_telemetry.py | read_queue | 71] {
+21:03:33: [INFO] [D:\Repositories\Uni Repo\WARG\autonomy-bootcamp-2025-p2\tests\integration\test_telemetry.py | read_queue | 71] {
             time_since_boot: 4000,
             x: 3.6666667461395264,
             y: 0.0,
@@ -285,7 +285,7 @@
             pitch_speed: 0.0,
             yaw_speed: 3.1415927410125732
         }
-02:12:31: [INFO] [D:\Repositories\Uni Repo\WARG\autonomy-bootcamp-2025-p2\tests\integration\test_telemetry.py | read_queue | 71] {
+21:03:33: [INFO] [D:\Repositories\Uni Repo\WARG\autonomy-bootcamp-2025-p2\tests\integration\test_telemetry.py | read_queue | 71] {
             time_since_boot: 4500,
             x: 4.333333492279053,
             y: 0.0,
